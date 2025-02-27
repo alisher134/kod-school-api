@@ -1,9 +1,23 @@
+import { INestApplication, Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app.module';
+import { bootstrap } from './bootstrap';
 
-async function bootstrap() {
-    const app = await NestFactory.create(AppModule);
-    await app.listen(process.env.PORT ?? 3000);
+async function main(): Promise<void> {
+    const logger = new Logger('Bootstrap');
+    let app: INestApplication;
+
+    try {
+        app = await NestFactory.create(AppModule, {
+            logger: ['error', 'warn', 'log'],
+        });
+
+        await bootstrap(app);
+    } catch (error) {
+        logger.error('❌ Error during bootstrap:', error);
+        if (app) await app.close();
+        process.exit(1);
+    }
 }
-bootstrap();
+main();
