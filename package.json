@@ -20,6 +20,10 @@
         "start:debug": "nest start --debug --watch",
         "start:prod": "dotenv -e .env.production -- node dist/main",
         "lint": "eslint \"src/**/*.ts\" --fix",
+        "docker:dev": "docker-compose -f docker-compose.dev.yml up -d",
+        "docker:prod": "docker-compose -f docker-compose.prod.yml up -d",
+        "prisma:migrate": "dotenv -e .env.development -- pnpm prisma migrate dev",
+        "prisma:deploy": "dotenv -e .env.development -- pnpm prisma migrate deploy",
         "prepare": "husky"
     },
     "dependencies": {

@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+    postgres:
+        container_name: kod-school-postgres
+        image: postgres:16-alpine
+        restart: unless-stopped
+        env_file:
+            - .env.development
+        volumes:
+            - kod-school-postgres_data:/var/lib/postgresql/data
+        networks:
+            - kod-school-backend
+        ports:
+            - 5432:5432
+
+    redis:
+        container_name: kod-school-redis
+        image: redis:7-alpine
+        restart: unless-stopped
+        env_file:
+            - .env.development
+        command: sh -c "redis-server --requirepass $${REDIS_PASSWORD}"
+        volumes:
+            - kod-school-redis_data:/data
+        networks:
+            - kod-school-backend
+        ports:
+            - 6379:6379
+
+volumes:
+    kod-school-postgres_data:
+    kod-school-redis_data:
+
+networks:
+    kod-school-backend:
