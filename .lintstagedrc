@@ -1,0 +1,4 @@
+{
+    "src/**/*.{ts,json}": ["pnpm format"],
+    "src/**/*.ts": ["pnpm lint"]
+}
