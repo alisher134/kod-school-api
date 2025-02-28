@@ -3,12 +3,14 @@ import {
     Controller,
     HttpCode,
     HttpStatus,
+    Patch,
     Post,
     Req,
     Res,
     UnauthorizedException,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
+import { User } from '@prisma/client';
 import type { Request, Response } from 'express';
 
 import { isProd } from '@common/utils';
@@ -19,8 +21,10 @@ import { translate } from '@infrastructure/i18n';
 import { TAccessToken } from './auth.interface';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators';
+import { ForgotPasswordDto, RestorePasswordDto } from './dto';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
+import { RestorePasswordService } from './restore-password.service';
 
 @Controller('auth')
 export class AuthController {
@@ -28,6 +32,7 @@ export class AuthController {
 
     constructor(
         private readonly authService: AuthService,
+        private readonly restorePasswordService: RestorePasswordService,
         private readonly configService: ConfigService<IConfigs>,
     ) {}
 
@@ -71,6 +76,18 @@ export class AuthController {
         );
         this.setRefreshTokenToCookie(res, refreshToken);
         return { accessToken };
+    }
+
+    @Post('forgot-password')
+    @HttpCode(HttpStatus.OK)
+    forgotPassword(@Body() dto: ForgotPasswordDto): Promise<void> {
+        return this.restorePasswordService.forgotPassword(dto);
+    }
+
+    @Patch('restore-password')
+    @HttpCode(HttpStatus.OK)
+    restorePassword(@Body() dto: RestorePasswordDto): Promise<User> {
+        return this.restorePasswordService.restorePassword(dto);
     }
 
     @Post('logout')

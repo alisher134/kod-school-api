@@ -17,7 +17,7 @@ export const appConfig = registerAs('app', () => ({
     port: parseInt(process.env.APP_PORT || '3000'),
     prefix: process.env.APP_PREFIX || 'api',
     url: process.env.APP_URL,
-    allowedOrigin: process.env.ALLOWED_ORIGINS,
+    allowedOrigin: process.env.ALLOWED_ORIGIN,
     domain: process.env.DOMAIN || 'localhost',
     throttleLimit: parseInt(process.env.THROTTLE_LIMIT),
     throttleTtl: parseInt(process.env.THROTTLE_TTL),

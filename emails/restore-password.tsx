@@ -20,7 +20,7 @@ interface RestorePasswordProps {
 }
 
 export default function RestorePassword({ email, resetLink }: RestorePasswordProps):React.JSX.Element {
-    const API_URL = process.env.APP_URL;
+    const APP_URL = process.env.APP_URL;
 
     return (
         <Html>
@@ -43,7 +43,7 @@ export default function RestorePassword({ email, resetLink }: RestorePasswordPro
         <Body style={styles.main}>
             <Container style={styles.container}>
                 <Img
-                    src={`${API_URL}/uploads/default/kod-logo.png`}
+                    src={`${APP_URL}/uploads/default/kod-logo.png`}
                     height="40"
                     alt="Kod.kz"
                     style={styles.logo}
