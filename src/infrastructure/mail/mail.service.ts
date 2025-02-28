@@ -1,7 +1,9 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { InjectQueue } from '@nestjs/bullmq';
 import { Injectable } from '@nestjs/common';
+import { render } from '@react-email/components';
 import { Queue } from 'bullmq';
+import { ReactElement } from 'react';
 
 import { IMailJob } from './mail.interface';
 
@@ -17,6 +19,29 @@ export class MailService {
             to,
             subject,
             html: body,
+        };
+
+        await this.mailQueue.add('send-mail', mailData, {
+            attempts: 3,
+            backoff: {
+                type: 'exponential',
+                delay: 5000,
+            },
+        });
+    }
+
+    async sendTemplateEmail<T>(
+        to: string,
+        subject: string,
+        template: (props: T) => ReactElement,
+        data: T,
+    ): Promise<void> {
+        const html = await render(template(data));
+
+        const mailData: IMailJob = {
+            to,
+            subject,
+            html,
         };
 
         await this.mailQueue.add('send-mail', mailData, {

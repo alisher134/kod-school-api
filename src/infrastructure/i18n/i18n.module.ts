@@ -13,7 +13,7 @@ import { isDev } from '@common/utils';
                 'ru-RU': 'ru',
             },
             loaderOptions: {
-                path: path.join(__dirname, '../../i18n'),
+                path: path.join(__dirname, '../../i18n/'),
                 watch: isDev,
             },
             typesOutputPath: isDev

@@ -12,6 +12,7 @@
         "outDir": "./dist",
         "baseUrl": "./",
         "paths": {
+            "@emails/*": ["emails/*"],
             "@common/*": ["src/common/*"],
             "@generated/*": ["src/generated/*"],
             "@infrastructure/*": ["src/infrastructure/*"],
@@ -23,6 +24,7 @@
         "noImplicitAny": false,
         "strictBindCallApply": false,
         "forceConsistentCasingInFileNames": false,
-        "noFallthroughCasesInSwitch": false
+        "noFallthroughCasesInSwitch": false,
+        "jsx": "react-jsx"
     }
 }
