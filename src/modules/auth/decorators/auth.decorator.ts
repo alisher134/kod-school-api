@@ -1,8 +1,7 @@
 import { UseGuards, applyDecorators } from '@nestjs/common';
 import type { UserRole } from '@prisma/client';
 
-import { AdminGuard } from '../guards/admin.guard';
-import { JwtGuard } from '../guards/jwt.guard';
+import { AdminGuard, JwtGuard } from '../guards';
 
 export const Auth = (role: UserRole = 'STUDENT') =>
     applyDecorators(

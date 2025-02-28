@@ -6,11 +6,12 @@ import { UserModule } from '@modules/user';
 
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
-import { JwtStrategy } from './strategies/jwt.strategy';
+import { LoginAttemptsService } from './login-attempts.service';
+import { JwtStrategy } from './strategies';
 
 @Module({
     imports: [UserModule, TokenModule],
     controllers: [AuthController],
-    providers: [AuthService, HashService, JwtStrategy],
+    providers: [AuthService, HashService, JwtStrategy, LoginAttemptsService],
 })
 export class AuthModule {}

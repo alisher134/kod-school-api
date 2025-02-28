@@ -16,6 +16,7 @@ import { UserService } from '@modules/user';
 
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
+import { LoginAttemptsService } from './login-attempts.service';
 
 @Injectable()
 export class AuthService {
@@ -24,6 +25,7 @@ export class AuthService {
         private readonly hashService: HashService,
         private readonly tokenService: TokenService,
         private readonly tokenStorage: TokenStorage,
+        private readonly loginAttemptsService: LoginAttemptsService,
         private readonly configService: ConfigService<IConfigs, true>,
     ) {}
 
@@ -39,6 +41,8 @@ export class AuthService {
     }
 
     async login(loginDto: LoginDto): Promise<ITokenPair> {
+        await this.loginAttemptsService.checkAttempts(loginDto.email);
+
         const user = await this.validate(loginDto);
         return this.generateTokens(user.id);
     }
@@ -76,8 +80,11 @@ export class AuthService {
             : false;
 
         if (!user || !isPasswordMatch) {
+            await this.loginAttemptsService.incrementAttempts(loginDto.email);
             throw new BadRequestException(translate('exception.invalid'));
         }
+
+        await this.loginAttemptsService.resetAttempts(loginDto.email);
 
         return user;
     }
