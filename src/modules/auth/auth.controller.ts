@@ -14,6 +14,7 @@ import type { Request, Response } from 'express';
 import { isProd } from '@common/utils';
 
 import { IConfigs } from '@infrastructure/config';
+import { translate } from '@infrastructure/i18n';
 
 import { TAccessToken } from './auth.interface';
 import { AuthService } from './auth.service';
@@ -61,7 +62,9 @@ export class AuthController {
     ): Promise<TAccessToken> {
         const refreshTokenFromCookie = req.cookies[this.REFRESH_TOKEN_NAME];
         if (!refreshTokenFromCookie)
-            throw new UnauthorizedException('Refresh token not be passed');
+            throw new UnauthorizedException(
+                translate('exception.refreshTokenMissing'),
+            );
 
         const { accessToken, refreshToken } = await this.authService.refresh(
             refreshTokenFromCookie,

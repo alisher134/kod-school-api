@@ -1,6 +1,8 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService, JwtSignOptions, JwtVerifyOptions } from '@nestjs/jwt';
 
+import { translate } from '@infrastructure/i18n';
+
 import { TokenConfig } from './token.config';
 import { ITokenPair, ITokenPayload } from './token.interface';
 import { TokenStorage } from './token.storage';
@@ -38,7 +40,9 @@ export class TokenService {
         try {
             return await this.jwtService.verifyAsync(token, options);
         } catch {
-            throw new UnauthorizedException('Invalid or expired token');
+            throw new UnauthorizedException(
+                translate('exception.refreshTokenInvalid'),
+            );
         }
     }
 

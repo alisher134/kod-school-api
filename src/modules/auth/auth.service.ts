@@ -7,6 +7,7 @@ import { ConfigService } from '@nestjs/config';
 import type { User } from '@prisma/client';
 
 import type { IConfigs } from '@infrastructure/config';
+import { translate } from '@infrastructure/i18n';
 
 import { HashService } from '@modules/hash';
 import { type ITokenPair, ITokenPayload, TokenService } from '@modules/token';
@@ -31,7 +32,7 @@ export class AuthService {
             registerDto.email,
         );
         if (existingUser)
-            throw new ConflictException('Email is already exists!');
+            throw new ConflictException(translate('exception.isExist'));
 
         const user = await this.userService.create(registerDto);
         return this.generateTokens(user.id);
@@ -75,7 +76,7 @@ export class AuthService {
             : false;
 
         if (!user || !isPasswordMatch) {
-            throw new BadRequestException('Email or password is incorrect');
+            throw new BadRequestException(translate('exception.invalid'));
         }
 
         return user;

@@ -1,6 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import type { Prisma, User } from '@prisma/client';
 
+import { translate } from '@infrastructure/i18n';
+
 import { RegisterDto } from '@modules/auth/dto/register.dto';
 import { HashService } from '@modules/hash';
 
@@ -30,7 +32,7 @@ export class UserService {
     async findById(userId: string, select?: Prisma.UserSelect): Promise<User> {
         const user = await this.userRepository.findOne({ id: userId }, select);
 
-        if (!user) throw new NotFoundException('User not found!');
+        if (!user) throw new NotFoundException(translate('exception.notFound'));
 
         return user;
     }
