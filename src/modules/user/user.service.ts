@@ -1,9 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { Prisma, User } from '@prisma/client';
+import type { Prisma, User } from '@prisma/client';
 
 import { RegisterDto } from '@modules/auth/dto/register.dto';
 import { HashService } from '@modules/hash';
 
+import { UpdateUserDto } from './dto/update-user.dto';
+import type { IUserProfile } from './user.interface';
 import { UserRepository } from './user.repository';
 
 @Injectable()
@@ -12,6 +14,11 @@ export class UserService {
         private readonly userRepository: UserRepository,
         private readonly hashService: HashService,
     ) {}
+
+    async getProfile(userId: string): Promise<IUserProfile> {
+        const user = await this.findById(userId);
+        return { profile: user };
+    }
 
     async findByEmail(
         email: string,
@@ -39,5 +46,15 @@ export class UserService {
         };
 
         return this.userRepository.create(userData);
+    }
+
+    async update(updateDto: UpdateUserDto, userId: string): Promise<User> {
+        await this.findById(userId);
+
+        const userData: Prisma.UserUpdateInput = {
+            ...updateDto,
+        };
+
+        return this.userRepository.update({ id: userId }, userData);
     }
 }
