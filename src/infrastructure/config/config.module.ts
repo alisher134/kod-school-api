@@ -9,6 +9,8 @@ import {
     appConfigValidationSchema,
     databaseConfig,
     databaseConfigValidationSchema,
+    jwtConfig,
+    jwtConfigValidationSchema,
     redisConfig,
     redisConfigValidationSchema,
 } from './configs';
@@ -18,11 +20,12 @@ import {
         ConfigModule.forRoot({
             isGlobal: true,
             envFilePath: isDev ? '.env.development' : '.env.production',
-            load: [appConfig, databaseConfig, redisConfig],
+            load: [appConfig, databaseConfig, redisConfig, jwtConfig],
             validationSchema: Joi.object({
                 ...appConfigValidationSchema,
                 ...databaseConfigValidationSchema,
                 ...redisConfigValidationSchema,
+                ...jwtConfigValidationSchema,
             }),
         }),
     ],
