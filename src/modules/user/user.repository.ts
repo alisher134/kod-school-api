@@ -18,20 +18,20 @@ export const DEFAULT_USER_SELECT: Prisma.UserSelect = {
 
 @Injectable()
 export class UserRepository {
-    constructor(private readonly prisma: PrismaService) {}
+    constructor(private readonly prismaService: PrismaService) {}
 
     async findOne(
         where: Prisma.UserWhereUniqueInput,
         select: Prisma.UserSelect = DEFAULT_USER_SELECT,
     ) {
-        return this.prisma.user.findUnique({ where, select });
+        return this.prismaService.user.findUnique({ where, select });
     }
 
     async create(
         data: Prisma.UserCreateInput,
         select: Prisma.UserSelect = DEFAULT_USER_SELECT,
     ) {
-        return this.prisma.user.create({ data, select });
+        return this.prismaService.user.create({ data, select });
     }
 
     async update(
@@ -39,7 +39,7 @@ export class UserRepository {
         data: Prisma.UserUpdateInput,
         select: Prisma.UserSelect = DEFAULT_USER_SELECT,
     ) {
-        return this.prisma.user.update({
+        return this.prismaService.user.update({
             where,
             data,
             select,

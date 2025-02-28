@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 
 import { NestConfigModule } from './config';
-import { PrismaModule } from './prisma/prisma.module';
+import { PrismaModule } from './prisma';
+import { RedisModule } from './redis';
 
 @Module({
-    imports: [NestConfigModule, PrismaModule],
+    imports: [NestConfigModule, PrismaModule, RedisModule],
 })
 export class InfrastructureModule {}

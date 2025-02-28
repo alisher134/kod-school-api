@@ -17,6 +17,7 @@ import { IConfigs } from '@infrastructure/config';
 
 import { TAccessToken } from './auth.interface';
 import { AuthService } from './auth.service';
+import { CurrentUser } from './decorators';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 
@@ -71,7 +72,11 @@ export class AuthController {
 
     @Post('logout')
     @HttpCode(HttpStatus.OK)
-    async logout(@Res({ passthrough: true }) res: Response): Promise<void> {
+    async logout(
+        @Res({ passthrough: true }) res: Response,
+        @CurrentUser('id') id: string,
+    ): Promise<void> {
+        await this.authService.logout(id);
         this.removeRefreshTokenFromCookie(res);
     }
 

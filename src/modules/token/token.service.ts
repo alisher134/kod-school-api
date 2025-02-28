@@ -3,12 +3,14 @@ import { JwtService, JwtSignOptions, JwtVerifyOptions } from '@nestjs/jwt';
 
 import { TokenConfig } from './token.config';
 import { ITokenPair, ITokenPayload } from './token.interface';
+import { TokenStorage } from './token.storage';
 
 @Injectable()
 export class TokenService {
     constructor(
         private readonly jwtService: JwtService,
         private readonly tokenConfig: TokenConfig,
+        private readonly tokenStorage: TokenStorage,
     ) {}
 
     async issueTokenPair(payload: ITokenPayload): Promise<ITokenPair> {
@@ -16,6 +18,8 @@ export class TokenService {
             this.createAccessToken(payload),
             this.createRefreshToken(payload),
         ]);
+
+        await this.tokenStorage.storeRefreshToken(refreshToken, payload.id);
 
         return { accessToken, refreshToken };
     }

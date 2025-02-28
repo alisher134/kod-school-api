@@ -10,6 +10,7 @@ import type { IConfigs } from '@infrastructure/config';
 
 import { HashService } from '@modules/hash';
 import { type ITokenPair, ITokenPayload, TokenService } from '@modules/token';
+import { TokenStorage } from '@modules/token/token.storage';
 import { UserService } from '@modules/user';
 
 import { LoginDto } from './dto/login.dto';
@@ -21,6 +22,7 @@ export class AuthService {
         private readonly userService: UserService,
         private readonly hashService: HashService,
         private readonly tokenService: TokenService,
+        private readonly tokenStorage: TokenStorage,
         private readonly configService: ConfigService<IConfigs, true>,
     ) {}
 
@@ -32,12 +34,12 @@ export class AuthService {
             throw new ConflictException('Email is already exists!');
 
         const user = await this.userService.create(registerDto);
-        return await this.generateTokens(user.id);
+        return this.generateTokens(user.id);
     }
 
     async login(loginDto: LoginDto): Promise<ITokenPair> {
         const user = await this.validate(loginDto);
-        return await this.generateTokens(user.id);
+        return this.generateTokens(user.id);
     }
 
     async refresh(refreshToken: string): Promise<ITokenPair> {
@@ -47,9 +49,17 @@ export class AuthService {
             }),
         });
 
+        await this.tokenStorage.validateRefreshToken(refreshToken, payload.id);
+
         const user = await this.userService.findById(payload.id, { id: true });
 
-        return await this.generateTokens(user.id);
+        await this.tokenStorage.invalidateRefreshToken(user.id);
+
+        return this.generateTokens(user.id);
+    }
+
+    async logout(userId: string) {
+        return await this.tokenStorage.invalidateRefreshToken(userId);
     }
 
     private async validate(loginDto: LoginDto): Promise<User> {
