@@ -17,25 +17,23 @@ import {
     redisConfigValidationSchema,
 } from './configs';
 
+const validationSchema = Joi.object({
+    ...appConfigValidationSchema,
+    ...databaseConfigValidationSchema,
+    ...redisConfigValidationSchema,
+    ...jwtConfigValidationSchema,
+    ...mailConfigValidationSchema,
+});
+
+const load = [appConfig, databaseConfig, redisConfig, jwtConfig, mailConfig];
+
 @Module({
     imports: [
         ConfigModule.forRoot({
             isGlobal: true,
             envFilePath: isDev ? '.env.development' : '.env.production',
-            load: [
-                appConfig,
-                databaseConfig,
-                redisConfig,
-                jwtConfig,
-                mailConfig,
-            ],
-            validationSchema: Joi.object({
-                ...appConfigValidationSchema,
-                ...databaseConfigValidationSchema,
-                ...redisConfigValidationSchema,
-                ...jwtConfigValidationSchema,
-                ...mailConfigValidationSchema,
-            }),
+            load,
+            validationSchema,
         }),
     ],
 })

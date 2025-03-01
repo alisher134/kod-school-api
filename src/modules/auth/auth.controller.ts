@@ -9,13 +9,9 @@ import {
     Res,
     UnauthorizedException,
 } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { User } from '@prisma/client';
 import type { Request, Response } from 'express';
 
-import { isProd } from '@common/utils';
-
-import { IConfigs } from '@infrastructure/config';
 import { translate } from '@infrastructure/i18n';
 
 import { TAccessToken } from './auth.interface';
@@ -25,6 +21,7 @@ import { ForgotPasswordDto, RestorePasswordDto } from './dto';
 import { LoginDto } from './dto/login.dto';
 import { RegisterDto } from './dto/register.dto';
 import { RestorePasswordService } from './restore-password.service';
+import { TokenCookieService } from './token-cookie.service';
 
 @Controller('auth')
 export class AuthController {
@@ -33,7 +30,7 @@ export class AuthController {
     constructor(
         private readonly authService: AuthService,
         private readonly restorePasswordService: RestorePasswordService,
-        private readonly configService: ConfigService<IConfigs>,
+        private readonly tokenCookieService: TokenCookieService,
     ) {}
 
     @Post('register')
@@ -44,7 +41,7 @@ export class AuthController {
     ): Promise<TAccessToken> {
         const { accessToken, refreshToken } =
             await this.authService.register(dto);
-        this.setRefreshTokenToCookie(res, refreshToken);
+        this.tokenCookieService.setRefreshTokenToCookie(res, refreshToken);
         return { accessToken };
     }
 
@@ -55,7 +52,7 @@ export class AuthController {
         @Res({ passthrough: true }) res: Response,
     ): Promise<TAccessToken> {
         const { accessToken, refreshToken } = await this.authService.login(dto);
-        this.setRefreshTokenToCookie(res, refreshToken);
+        this.tokenCookieService.setRefreshTokenToCookie(res, refreshToken);
         return { accessToken };
     }
 
@@ -74,7 +71,7 @@ export class AuthController {
         const { accessToken, refreshToken } = await this.authService.refresh(
             refreshTokenFromCookie,
         );
-        this.setRefreshTokenToCookie(res, refreshToken);
+        this.tokenCookieService.setRefreshTokenToCookie(res, refreshToken);
         return { accessToken };
     }
 
@@ -97,32 +94,6 @@ export class AuthController {
         @CurrentUser('id') id: string,
     ): Promise<void> {
         await this.authService.logout(id);
-        this.removeRefreshTokenFromCookie(res);
-    }
-
-    private setRefreshTokenToCookie(res: Response, refreshToken: string): void {
-        const expiresIn = new Date();
-        expiresIn.setDate(expiresIn.getDate() + 7);
-
-        res.cookie(this.REFRESH_TOKEN_NAME, refreshToken, {
-            httpOnly: true,
-            secure: isProd,
-            domain: this.configService.get<string>('app.domain', {
-                infer: true,
-            }),
-            sameSite: 'lax',
-            expires: expiresIn,
-        });
-    }
-
-    private removeRefreshTokenFromCookie(res: Response): void {
-        res.clearCookie(this.REFRESH_TOKEN_NAME, {
-            httpOnly: true,
-            secure: isProd,
-            domain: this.configService.get<string>('app.domain', {
-                infer: true,
-            }),
-            sameSite: 'lax',
-        });
+        this.tokenCookieService.removeRefreshTokenFromCookie(res);
     }
 }

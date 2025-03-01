@@ -4,7 +4,7 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 
-import { isDev } from '@common/utils';
+import { isDev, isProd } from '@common/utils';
 
 import { IConfigs } from '@infrastructure/config';
 
@@ -20,7 +20,7 @@ export async function bootstrap(app: INestApplication): Promise<void> {
         new ValidationPipe({
             whitelist: true,
             transform: true,
-            forbidUnknownValues: false,
+            forbidUnknownValues: isProd,
             enableDebugMessages: isDev,
         }),
     );

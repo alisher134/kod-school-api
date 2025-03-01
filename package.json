@@ -18,7 +18,7 @@
         "start": "nest start",
         "start:dev": "dotenv -e .env.development -- nest start --watch",
         "start:debug": "nest start --debug --watch",
-        "start:prod": "dotenv -e .env.production -- node dist/main",
+        "start:prod": "dotenv -e .env.production -- node dist/src/main",
         "lint": "eslint \"src/**/*.ts\" --fix",
         "docker:dev": "docker-compose -f docker-compose.dev.yml up -d",
         "docker:prod": "docker-compose -f docker-compose.prod.yml up -d",

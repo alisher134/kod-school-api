@@ -4,19 +4,19 @@ export class UpdateUserDto {
     @IsOptional()
     @IsString()
     @MinLength(2)
-    firstName: string;
+    firstName?: string;
 
     @IsOptional()
     @IsString()
     @MinLength(2)
-    lastName: string;
+    lastName?: string;
 
     @IsOptional()
     @IsString()
-    avatarPath: string;
+    avatarPath?: string;
 
     @IsOptional()
     @IsString()
     @MinLength(50)
-    description: string;
+    description?: string;
 }

@@ -5,7 +5,7 @@ import {
     OnModuleInit,
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Redis } from 'ioredis';
+import { Redis, RedisOptions } from 'ioredis';
 
 import { IConfigs } from '@infrastructure/config';
 
@@ -17,14 +17,15 @@ export class RedisService
     private readonly logger = new Logger(RedisService.name);
 
     constructor(private readonly configService: ConfigService<IConfigs, true>) {
-        super({
+        const redisOptions: RedisOptions = {
             host: configService.get('redis.host', { infer: true }),
             port: configService.get('redis.port', { infer: true }),
             password: configService.get('redis.password', { infer: true }),
-        });
+        };
+        super(redisOptions);
     }
 
-    async onModuleInit() {
+    async onModuleInit(): Promise<void> {
         try {
             await this.ping();
             this.logger.log('✅ Redis connected successfully');
@@ -34,7 +35,7 @@ export class RedisService
         }
     }
 
-    async onModuleDestroy() {
+    async onModuleDestroy(): Promise<void> {
         try {
             this.disconnect();
             this.logger.log('🟢 Redis connection closed successfully.');

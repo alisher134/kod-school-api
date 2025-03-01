@@ -13,7 +13,7 @@ export class PrismaService
 {
     private readonly logger = new Logger(PrismaService.name);
 
-    async onModuleInit() {
+    async onModuleInit(): Promise<void> {
         try {
             await this.$connect();
             this.logger.log('✅ Connection to database successful.');
@@ -23,7 +23,7 @@ export class PrismaService
         }
     }
 
-    async onModuleDestroy() {
+    async onModuleDestroy(): Promise<void> {
         try {
             await this.$disconnect();
             this.logger.log('🟢 Database connection closed successfully.');

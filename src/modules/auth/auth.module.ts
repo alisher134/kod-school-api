@@ -11,6 +11,7 @@ import { AuthService } from './auth.service';
 import { LoginAttemptsService } from './login-attempts.service';
 import { RestorePasswordService } from './restore-password.service';
 import { JwtStrategy } from './strategies';
+import { TokenCookieService } from './token-cookie.service';
 
 @Module({
     imports: [UserModule, TokenModule, MailModule],
@@ -21,6 +22,7 @@ import { JwtStrategy } from './strategies';
         JwtStrategy,
         LoginAttemptsService,
         RestorePasswordService,
+        TokenCookieService,
     ],
 })
 export class AuthModule {}

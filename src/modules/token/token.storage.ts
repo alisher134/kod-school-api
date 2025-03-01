@@ -34,6 +34,8 @@ export class TokenStorage {
         const key = this.generateKey(userId);
         const cacheData = await this.redisService.get(key);
 
+        if (!cacheData) return false;
+
         return cacheData === refreshToken;
     }
 

@@ -9,8 +9,7 @@ import { translate } from '@infrastructure/i18n';
 
 export class AdminGuard implements CanActivate {
     canActivate(ctx: ExecutionContext): boolean {
-        const request = ctx.switchToHttp().getRequest<{ user: User }>();
-        const user = request.user;
+        const { user } = ctx.switchToHttp().getRequest<{ user: User }>();
 
         if (user.role !== 'ADMIN')
             throw new ForbiddenException(translate('exception.rights'));
