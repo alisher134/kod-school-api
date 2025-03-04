@@ -1,10 +1,14 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService, JwtSignOptions, JwtVerifyOptions } from '@nestjs/jwt';
+import { type Request } from 'express';
 
 import { translate } from '@infrastructure/i18n';
+import { RedisService } from '@infrastructure/redis';
+
+import { FingerprintService } from '@modules/token/fingerprint.service';
 
 import { TokenConfig } from './token.config';
-import { ITokenPair, ITokenPayload } from './token.interface';
+import type { ITokenPair, ITokenPayload } from './token.interface';
 import { TokenStorage } from './token.storage';
 
 @Injectable()
@@ -13,15 +17,26 @@ export class TokenService {
         private readonly jwtService: JwtService,
         private readonly tokenConfig: TokenConfig,
         private readonly tokenStorage: TokenStorage,
+        private readonly redisService: RedisService,
+        private readonly fingerprintService: FingerprintService,
     ) {}
 
-    async issueTokenPair(payload: ITokenPayload): Promise<ITokenPair> {
+    async issueTokenPair(
+        payload: ITokenPayload,
+        req: Request,
+    ): Promise<ITokenPair> {
+        const fingerprint =
+            await this.fingerprintService.generateFingerprint(req);
         const [accessToken, refreshToken] = await Promise.all([
             this.createAccessToken(payload),
             this.createRefreshToken(payload),
         ]);
 
-        await this.tokenStorage.storeRefreshToken(refreshToken, payload.id);
+        await this.tokenStorage.storeRefreshToken(
+            refreshToken,
+            payload.id,
+            fingerprint,
+        );
 
         return { accessToken, refreshToken };
     }

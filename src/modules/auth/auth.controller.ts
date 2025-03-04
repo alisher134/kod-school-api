@@ -9,6 +9,7 @@ import {
     Res,
     UnauthorizedException,
 } from '@nestjs/common';
+import { Throttle } from '@nestjs/throttler';
 import { User } from '@prisma/client';
 import type { Request, Response } from 'express';
 
@@ -37,10 +38,13 @@ export class AuthController {
     @HttpCode(HttpStatus.CREATED)
     async register(
         @Body() dto: RegisterDto,
+        @Req() req: Request,
         @Res({ passthrough: true }) res: Response,
     ): Promise<TAccessToken> {
-        const { accessToken, refreshToken } =
-            await this.authService.register(dto);
+        const { accessToken, refreshToken } = await this.authService.register(
+            dto,
+            req,
+        );
         this.tokenCookieService.setRefreshTokenToCookie(res, refreshToken);
         return { accessToken };
     }
@@ -49,13 +53,18 @@ export class AuthController {
     @HttpCode(HttpStatus.OK)
     async login(
         @Body() dto: LoginDto,
+        @Req() req: Request,
         @Res({ passthrough: true }) res: Response,
     ): Promise<TAccessToken> {
-        const { accessToken, refreshToken } = await this.authService.login(dto);
+        const { accessToken, refreshToken } = await this.authService.login(
+            dto,
+            req,
+        );
         this.tokenCookieService.setRefreshTokenToCookie(res, refreshToken);
         return { accessToken };
     }
 
+    @Throttle({ default: { limit: 10, ttl: 60000 } })
     @Post('refresh')
     @HttpCode(HttpStatus.OK)
     async refresh(
@@ -70,6 +79,7 @@ export class AuthController {
 
         const { accessToken, refreshToken } = await this.authService.refresh(
             refreshTokenFromCookie,
+            req,
         );
         this.tokenCookieService.setRefreshTokenToCookie(res, refreshToken);
         return { accessToken };
