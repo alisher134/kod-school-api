@@ -4,19 +4,6 @@ import type { Prisma, User } from '@prisma/client';
 import { PrismaService } from '@infrastructure/prisma';
 import { RedisService } from '@infrastructure/redis';
 
-export const DEFAULT_USER_SELECT: Prisma.UserSelect = {
-    id: true,
-    createdAt: true,
-    updatedAt: true,
-    email: true,
-    firstName: true,
-    lastName: true,
-    role: true,
-    avatarPath: true,
-    description: true,
-    password: false,
-} as const;
-
 @Injectable()
 export class UserRepository {
     private readonly CACHE_USER_KEY = 'user';
@@ -27,10 +14,7 @@ export class UserRepository {
         private readonly redisService: RedisService,
     ) {}
 
-    async findOne(
-        where: Prisma.UserWhereUniqueInput,
-        select: Prisma.UserSelect = DEFAULT_USER_SELECT,
-    ): Promise<User | null> {
+    async findOne(where: Prisma.UserWhereUniqueInput): Promise<User | null> {
         const cacheKey = where.id
             ? `${this.CACHE_USER_KEY}:${where.id}`
             : `${this.CACHE_USER_KEY}:${where.email}`;
@@ -38,28 +22,20 @@ export class UserRepository {
         const cachedUser = await this.redisService.get(cacheKey);
         if (cachedUser) return JSON.parse(cachedUser);
 
-        const user = await this.prisma.user.findUnique({ where, select });
-        if (user)
-            await this.redisService.setex(
-                cacheKey,
-                this.CACHE_USER_TL,
-                JSON.stringify(user),
-            );
+        const user = await this.prisma.user.findUnique({
+            where,
+        });
+        if (user) await this.setToCache(cacheKey, user);
 
         return user;
     }
 
-    async create(
-        data: Prisma.UserCreateInput,
-        select: Prisma.UserSelect = DEFAULT_USER_SELECT,
-    ): Promise<User> {
-        const user = await this.prisma.user.create({ data, select });
+    async create(data: Prisma.UserCreateInput): Promise<User> {
+        const user = await this.prisma.user.create({
+            data,
+        });
         const cacheKey = `${this.CACHE_USER_KEY}:${user.id}`;
-        await this.redisService.setex(
-            cacheKey,
-            this.CACHE_USER_TL,
-            JSON.stringify(user),
-        );
+        await this.setToCache(cacheKey, user);
 
         return user;
     }
@@ -67,22 +43,28 @@ export class UserRepository {
     async update(
         where: Prisma.UserWhereUniqueInput,
         data: Prisma.UserUpdateInput,
-        select: Prisma.UserSelect = DEFAULT_USER_SELECT,
     ): Promise<User> {
         const user = await this.prisma.user.update({
             where,
             data,
-            select,
         });
 
-        const cacheKey = `${this.CACHE_USER_KEY}:${user.id}`;
-        await this.redisService.del(cacheKey);
-        await this.redisService.setex(
-            cacheKey,
+        const cacheKeys = [
+            `${this.CACHE_USER_KEY}:${user.id}`,
+            `${this.CACHE_USER_KEY}:${user.email}`,
+        ];
+
+        await Promise.all(cacheKeys.map((key) => this.redisService.del(key)));
+        await Promise.all(cacheKeys.map((key) => this.setToCache(key, user)));
+
+        return user;
+    }
+
+    private async setToCache(key: string, user: User) {
+        return await this.redisService.setex(
+            key,
             this.CACHE_USER_TL,
             JSON.stringify(user),
         );
-
-        return user;
     }
 }

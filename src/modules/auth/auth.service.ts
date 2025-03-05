@@ -68,7 +68,7 @@ export class AuthService {
             req,
         );
 
-        const user = await this.userService.findById(payload.id, { id: true });
+        const user = await this.userService.findById(payload.id);
 
         await this.tokenStorage.invalidateRefreshToken(user.id);
 
@@ -80,10 +80,8 @@ export class AuthService {
     }
 
     private async validate(loginDto: LoginDto): Promise<User> {
-        const user = await this.userService.findByEmail(loginDto.email, {
-            id: true,
-            password: true,
-        });
+        const user = await this.userService.findByEmail(loginDto.email);
+
         const isPasswordMatch = user
             ? await this.hashService.comparePassword(
                   user.password,

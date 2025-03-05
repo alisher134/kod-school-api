@@ -51,7 +51,7 @@ export class RestorePasswordService {
         const resetLink = `${clientUrl}/auth/reset?token=${token}`;
 
         await this.mailService.sendTemplateEmail(
-            user.email,
+            dto.email,
             'Восстановление пароля',
             RestorePassword,
             {

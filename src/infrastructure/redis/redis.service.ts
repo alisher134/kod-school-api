@@ -28,7 +28,7 @@ export class RedisService
     async onModuleInit(): Promise<void> {
         try {
             await this.ping();
-            this.logger.log('✅ Redis connected successfully');
+            this.logger.log('🟢 Redis connected successfully');
         } catch (error) {
             this.logger.error('❌ Failed to connect to Redis:', error);
             process.exit(1);
@@ -38,7 +38,7 @@ export class RedisService
     async onModuleDestroy(): Promise<void> {
         try {
             this.disconnect();
-            this.logger.log('🟢 Redis connection closed successfully.');
+            this.logger.log('🔴 Redis connection closed successfully.');
         } catch (error) {
             this.logger.error(
                 '⚠️ Error while shutting down Redis connection',

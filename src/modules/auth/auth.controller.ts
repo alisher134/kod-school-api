@@ -85,12 +85,14 @@ export class AuthController {
         return { accessToken };
     }
 
+    @Throttle({ default: { limit: 5, ttl: 60000 } })
     @Post('forgot-password')
     @HttpCode(HttpStatus.OK)
     forgotPassword(@Body() dto: ForgotPasswordDto): Promise<void> {
         return this.restorePasswordService.forgotPassword(dto);
     }
 
+    @Throttle({ default: { limit: 5, ttl: 60000 } })
     @Patch('restore-password')
     @HttpCode(HttpStatus.OK)
     restorePassword(@Body() dto: RestorePasswordDto): Promise<User> {

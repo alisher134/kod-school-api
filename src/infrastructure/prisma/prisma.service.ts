@@ -16,7 +16,7 @@ export class PrismaService
     async onModuleInit(): Promise<void> {
         try {
             await this.$connect();
-            this.logger.log('✅ Connection to database successful.');
+            this.logger.log('🟢 Connection to database successful.');
         } catch (error) {
             this.logger.error('❌ Failed to connect to the database.', error);
             process.exit(1);
@@ -26,7 +26,7 @@ export class PrismaService
     async onModuleDestroy(): Promise<void> {
         try {
             await this.$disconnect();
-            this.logger.log('🟢 Database connection closed successfully.');
+            this.logger.log('🔴 Database connection closed successfully.');
         } catch (error) {
             this.logger.error('⚠️ Error closing database connection.', error);
         }
