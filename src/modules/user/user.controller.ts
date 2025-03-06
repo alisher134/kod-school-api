@@ -6,11 +6,12 @@ import {
     HttpStatus,
     Patch,
 } from '@nestjs/common';
-import type { User } from '@prisma/client';
+
+import type { User } from '@prisma/generated';
 
 import { Auth, CurrentUser } from '@modules/auth/decorators';
 
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto } from './dto';
 import type { IUserProfile } from './user.interface';
 import { UserService } from './user.service';
 
@@ -31,7 +32,7 @@ export class UserController {
     updateProfile(
         @CurrentUser('id') userId: string,
         @Body() updateUser: UpdateUserDto,
-    ): Promise<User> {
+    ): Promise<Omit<User, 'password'>> {
         return this.userService.update(updateUser, userId);
     }
 }

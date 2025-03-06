@@ -10,19 +10,25 @@ import {
     UnauthorizedException,
 } from '@nestjs/common';
 import { Throttle } from '@nestjs/throttler';
-import { User } from '@prisma/client';
 import type { Request, Response } from 'express';
+
+import { User } from '@prisma/generated';
 
 import { translate } from '@infrastructure/i18n';
 
 import { TAccessToken } from './auth.interface';
-import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators';
-import { ForgotPasswordDto, RestorePasswordDto } from './dto';
-import { LoginDto } from './dto/login.dto';
-import { RegisterDto } from './dto/register.dto';
-import { RestorePasswordService } from './restore-password.service';
-import { TokenCookieService } from './token-cookie.service';
+import {
+    ForgotPasswordDto,
+    LoginDto,
+    RegisterDto,
+    RestorePasswordDto,
+} from './dto';
+import {
+    AuthService,
+    RestorePasswordService,
+    TokenCookieService,
+} from './services';
 
 @Controller('auth')
 export class AuthController {

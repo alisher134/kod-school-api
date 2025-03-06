@@ -9,6 +9,11 @@
                 "include": "i18n/**/*",
                 "watchAssets": true,
                 "outDir": "dist/src"
+            },
+            {
+                "include": "../prisma/generated",
+                "outDir": "dist/prisma",
+                "watchAssets": true
             }
         ]
     }

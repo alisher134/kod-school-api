@@ -9,9 +9,7 @@ async function main(): Promise<void> {
     let app: INestApplication;
 
     try {
-        app = await NestFactory.create(AppModule, {
-            logger: ['error', 'warn', 'log'],
-        });
+        app = await NestFactory.create(AppModule);
 
         await bootstrap(app);
     } catch (error) {

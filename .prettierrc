@@ -8,6 +8,8 @@
     "plugins": ["@trivago/prettier-plugin-sort-imports"],
     "importOrder": [
         "<THIRD_PARTY_MODULES>",
+        "^@emails/(.*)",
+        "^@prisma/generated",
         "^@common/(.*)",
         "^@generated/(.*)",
         "^@infrastructure/(.*)",

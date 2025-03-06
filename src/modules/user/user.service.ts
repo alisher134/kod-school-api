@@ -1,12 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import type { Prisma, User } from '@prisma/client';
+
+import { Prisma, User } from '@prisma/generated';
 
 import { translate } from '@infrastructure/i18n';
 
-import { RegisterDto } from '@modules/auth/dto/register.dto';
+import { RegisterDto } from '@modules/auth';
 import { HashService } from '@modules/hash';
 
-import { UpdateUserDto } from './dto/update-user.dto';
+import { UpdateUserDto } from './dto';
 import type { IUserProfile } from './user.interface';
 import { UserRepository } from './user.repository';
 
@@ -46,14 +47,18 @@ export class UserService {
         return this.userRepository.create(userData);
     }
 
-    async update(updateDto: UpdateUserDto, userId: string): Promise<User> {
+    async update(
+        updateDto: UpdateUserDto,
+        userId: string,
+    ): Promise<Omit<User, 'password'>> {
         await this.findById(userId);
 
         const userData: Prisma.UserUpdateInput = {
             ...updateDto,
         };
 
-        return this.userRepository.update({ id: userId }, userData);
+        const user = await this.userRepository.update({ id: userId }, userData);
+        return this.omitPassword(user);
     }
 
     private omitPassword(user: User): Omit<User, 'password'> {

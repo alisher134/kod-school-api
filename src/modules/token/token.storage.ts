@@ -3,7 +3,7 @@ import type { Request } from 'express';
 
 import { RedisService } from '@infrastructure/redis';
 
-import { FingerprintService } from './fingerprint.service';
+import { FingerprintService } from './services';
 import { TokenConfig } from './token.config';
 
 @Injectable()

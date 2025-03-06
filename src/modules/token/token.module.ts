@@ -2,10 +2,9 @@ import { Module } from '@nestjs/common';
 import { JwtModule } from '@nestjs/jwt';
 
 import { HashModule } from '@modules/hash';
-import { FingerprintService } from '@modules/token/fingerprint.service';
 
+import { FingerprintService, TokenService } from './services';
 import { TokenConfig } from './token.config';
-import { TokenService } from './token.service';
 import { TokenStorage } from './token.storage';
 
 @Module({

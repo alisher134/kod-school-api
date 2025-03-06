@@ -3,7 +3,8 @@ import {
     ExecutionContext,
     ForbiddenException,
 } from '@nestjs/common';
-import type { User } from '@prisma/client';
+
+import type { User } from '@prisma/generated';
 
 import { translate } from '@infrastructure/i18n';
 

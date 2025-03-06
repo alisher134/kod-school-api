@@ -13,6 +13,9 @@
         "baseUrl": "./",
         "paths": {
             "@emails/*": ["emails/*"],
+            "@prisma/generated": ["prisma/generated"],
+            "@prisma/generated/*": ["prisma/generated/*"],
+
             "@common/*": ["src/common/*"],
             "@generated/*": ["src/generated/*"],
             "@infrastructure/*": ["src/infrastructure/*"],

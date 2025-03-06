@@ -7,11 +7,13 @@ import { TokenModule } from '@modules/token';
 import { UserModule } from '@modules/user';
 
 import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { LoginAttemptsService } from './login-attempts.service';
-import { RestorePasswordService } from './restore-password.service';
+import {
+    AuthService,
+    LoginAttemptsService,
+    RestorePasswordService,
+    TokenCookieService,
+} from './services';
 import { JwtStrategy } from './strategies';
-import { TokenCookieService } from './token-cookie.service';
 
 @Module({
     imports: [UserModule, TokenModule, MailModule],
