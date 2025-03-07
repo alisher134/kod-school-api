@@ -11,7 +11,7 @@ export class UserRepository {
     private readonly CACHE_USER_TL = 3600;
 
     constructor(
-        private readonly prisma: PrismaService,
+        private readonly prismaService: PrismaService,
         private readonly redisService: RedisService,
     ) {}
 
@@ -23,7 +23,7 @@ export class UserRepository {
         const cachedUser = await this.redisService.get(cacheKey);
         if (cachedUser) return JSON.parse(cachedUser);
 
-        const user = await this.prisma.user.findUnique({
+        const user = await this.prismaService.user.findUnique({
             where,
         });
         if (user) await this.setToCache(cacheKey, user);
@@ -32,7 +32,7 @@ export class UserRepository {
     }
 
     async create(data: Prisma.UserCreateInput): Promise<User> {
-        const user = await this.prisma.user.create({
+        const user = await this.prismaService.user.create({
             data,
         });
         const cacheKey = `${this.CACHE_USER_KEY}:${user.id}`;
@@ -45,7 +45,7 @@ export class UserRepository {
         where: Prisma.UserWhereUniqueInput,
         data: Prisma.UserUpdateInput,
     ): Promise<User> {
-        const user = await this.prisma.user.update({
+        const user = await this.prismaService.user.update({
             where,
             data,
         });

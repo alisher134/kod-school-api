@@ -130,33 +130,12 @@ exports.Prisma.UserScalarFieldEnum = {
   role: 'role'
 };
 
-exports.Prisma.CourseScalarFieldEnum = {
+exports.Prisma.DirectionScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  title: 'title',
-  slug: 'slug',
-  description: 'description',
-  thumbnail: 'thumbnail',
-  views: 'views'
-};
-
-exports.Prisma.LessonScalarFieldEnum = {
-  id: 'id',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  title: 'title',
-  slug: 'slug',
-  description: 'description',
-  courseId: 'courseId'
-};
-
-exports.Prisma.UserProgressScalarFieldEnum = {
-  id: 'id',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  isCompleted: 'isCompleted',
-  lessonId: 'lessonId'
+  name: 'name',
+  slug: 'slug'
 };
 
 exports.Prisma.SortOrder = {
@@ -180,9 +159,7 @@ exports.UserRole = exports.$Enums.UserRole = {
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Course: 'Course',
-  Lesson: 'Lesson',
-  UserProgress: 'UserProgress'
+  Direction: 'Direction'
 };
 
 /**
