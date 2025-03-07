@@ -31,6 +31,26 @@ model User {
   role UserRole @default(STUDENT)
 }
 
+model Course {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title       String
+  slug        String @unique
+  description String
+
+  thumbnail    String
+  requirements String[]
+  subTitle     String
+
+  techs String[]
+
+  avgRating Float @default(4.0)
+
+  directions Direction[]
+}
+
 model Direction {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
@@ -38,6 +58,9 @@ model Direction {
 
   name String
   slug String @unique
+
+  course   Course? @relation(fields: [courseId], references: [id])
+  courseId String?
 }
 
 enum UserRole {

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 
-import { Direction, Prisma } from '@prisma/generated';
+import type { Direction, Prisma } from '@prisma/generated';
 
 import { PrismaService } from '@infrastructure/prisma';
 

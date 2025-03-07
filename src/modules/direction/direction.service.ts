@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { Direction, Prisma } from '@prisma/generated';
+import type { Direction, Prisma } from '@prisma/generated';
 
 import { generateSlug } from '@common/utils';
 
 import { DirectionRepository } from './direction.repository';
 import { UpdateDirectionDto } from './dto';
 
-type TDirectionField = keyof Pick<Direction, 'id' | 'slug'>;
+type TDirectionField = 'id' | 'slug';
 
 @Injectable()
 export class DirectionService {
