@@ -52,18 +52,6 @@ model Course {
   sections   Section[]
 }
 
-model Section {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  name String
-  slug String @unique
-
-  course   Course? @relation(fields: [courseId], references: [id])
-  courseId String?
-}
-
 model Direction {
   id        String   @id @default(uuid())
   createdAt DateTime @default(now())
@@ -73,6 +61,34 @@ model Direction {
   slug String @unique
 
   courses Course[]
+}
+
+model Section {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+  slug String @unique
+
+  lessons Lesson[]
+
+  course   Course? @relation(fields: [courseId], references: [id])
+  courseId String?
+}
+
+model Lesson {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  title    String
+  slug     String @unique
+  videoUrl String
+  order    Int
+
+  section   Section @relation(fields: [sectionId], references: [id])
+  sectionId String
 }
 
 enum UserRole {

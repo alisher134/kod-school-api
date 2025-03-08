@@ -24,15 +24,20 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Course = $Result.DefaultSelection<Prisma.$CoursePayload>
 /**
+ * Model Direction
+ * 
+ */
+export type Direction = $Result.DefaultSelection<Prisma.$DirectionPayload>
+/**
  * Model Section
  * 
  */
 export type Section = $Result.DefaultSelection<Prisma.$SectionPayload>
 /**
- * Model Direction
+ * Model Lesson
  * 
  */
-export type Direction = $Result.DefaultSelection<Prisma.$DirectionPayload>
+export type Lesson = $Result.DefaultSelection<Prisma.$LessonPayload>
 
 /**
  * Enums
@@ -197,6 +202,16 @@ export class PrismaClient<
   get course(): Prisma.CourseDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.direction`: Exposes CRUD operations for the **Direction** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Directions
+    * const directions = await prisma.direction.findMany()
+    * ```
+    */
+  get direction(): Prisma.DirectionDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.section`: Exposes CRUD operations for the **Section** model.
     * Example usage:
     * ```ts
@@ -207,14 +222,14 @@ export class PrismaClient<
   get section(): Prisma.SectionDelegate<ExtArgs, ClientOptions>;
 
   /**
-   * `prisma.direction`: Exposes CRUD operations for the **Direction** model.
+   * `prisma.lesson`: Exposes CRUD operations for the **Lesson** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Directions
-    * const directions = await prisma.direction.findMany()
+    * // Fetch zero or more Lessons
+    * const lessons = await prisma.lesson.findMany()
     * ```
     */
-  get direction(): Prisma.DirectionDelegate<ExtArgs, ClientOptions>;
+  get lesson(): Prisma.LessonDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -657,8 +672,9 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Course: 'Course',
+    Direction: 'Direction',
     Section: 'Section',
-    Direction: 'Direction'
+    Lesson: 'Lesson'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -674,7 +690,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> = {
     meta: {
-      modelProps: "user" | "course" | "section" | "direction"
+      modelProps: "user" | "course" | "direction" | "section" | "lesson"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -826,6 +842,80 @@ export namespace Prisma {
           }
         }
       }
+      Direction: {
+        payload: Prisma.$DirectionPayload<ExtArgs>
+        fields: Prisma.DirectionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.DirectionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.DirectionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>
+          }
+          findFirst: {
+            args: Prisma.DirectionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.DirectionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>
+          }
+          findMany: {
+            args: Prisma.DirectionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>[]
+          }
+          create: {
+            args: Prisma.DirectionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>
+          }
+          createMany: {
+            args: Prisma.DirectionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.DirectionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>[]
+          }
+          delete: {
+            args: Prisma.DirectionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>
+          }
+          update: {
+            args: Prisma.DirectionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>
+          }
+          deleteMany: {
+            args: Prisma.DirectionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.DirectionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.DirectionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>[]
+          }
+          upsert: {
+            args: Prisma.DirectionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>
+          }
+          aggregate: {
+            args: Prisma.DirectionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateDirection>
+          }
+          groupBy: {
+            args: Prisma.DirectionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<DirectionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.DirectionCountArgs<ExtArgs>
+            result: $Utils.Optional<DirectionCountAggregateOutputType> | number
+          }
+        }
+      }
       Section: {
         payload: Prisma.$SectionPayload<ExtArgs>
         fields: Prisma.SectionFieldRefs
@@ -900,77 +990,77 @@ export namespace Prisma {
           }
         }
       }
-      Direction: {
-        payload: Prisma.$DirectionPayload<ExtArgs>
-        fields: Prisma.DirectionFieldRefs
+      Lesson: {
+        payload: Prisma.$LessonPayload<ExtArgs>
+        fields: Prisma.LessonFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.DirectionFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DirectionPayload> | null
+            args: Prisma.LessonFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LessonPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.DirectionFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>
+            args: Prisma.LessonFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LessonPayload>
           }
           findFirst: {
-            args: Prisma.DirectionFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DirectionPayload> | null
+            args: Prisma.LessonFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LessonPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.DirectionFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>
+            args: Prisma.LessonFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LessonPayload>
           }
           findMany: {
-            args: Prisma.DirectionFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>[]
+            args: Prisma.LessonFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LessonPayload>[]
           }
           create: {
-            args: Prisma.DirectionCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>
+            args: Prisma.LessonCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LessonPayload>
           }
           createMany: {
-            args: Prisma.DirectionCreateManyArgs<ExtArgs>
+            args: Prisma.LessonCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.DirectionCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>[]
+            args: Prisma.LessonCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LessonPayload>[]
           }
           delete: {
-            args: Prisma.DirectionDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>
+            args: Prisma.LessonDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LessonPayload>
           }
           update: {
-            args: Prisma.DirectionUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>
+            args: Prisma.LessonUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LessonPayload>
           }
           deleteMany: {
-            args: Prisma.DirectionDeleteManyArgs<ExtArgs>
+            args: Prisma.LessonDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.DirectionUpdateManyArgs<ExtArgs>
+            args: Prisma.LessonUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.DirectionUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>[]
+            args: Prisma.LessonUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LessonPayload>[]
           }
           upsert: {
-            args: Prisma.DirectionUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$DirectionPayload>
+            args: Prisma.LessonUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$LessonPayload>
           }
           aggregate: {
-            args: Prisma.DirectionAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateDirection>
+            args: Prisma.LessonAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateLesson>
           }
           groupBy: {
-            args: Prisma.DirectionGroupByArgs<ExtArgs>
-            result: $Utils.Optional<DirectionGroupByOutputType>[]
+            args: Prisma.LessonGroupByArgs<ExtArgs>
+            result: $Utils.Optional<LessonGroupByOutputType>[]
           }
           count: {
-            args: Prisma.DirectionCountArgs<ExtArgs>
-            result: $Utils.Optional<DirectionCountAggregateOutputType> | number
+            args: Prisma.LessonCountArgs<ExtArgs>
+            result: $Utils.Optional<LessonCountAggregateOutputType> | number
           }
         }
       }
@@ -1060,8 +1150,9 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     user?: UserOmit
     course?: CourseOmit
-    section?: SectionOmit
     direction?: DirectionOmit
+    section?: SectionOmit
+    lesson?: LessonOmit
   }
 
   /* Types for Logging */
@@ -1219,6 +1310,37 @@ export namespace Prisma {
    */
   export type DirectionCountOutputTypeCountCoursesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CourseWhereInput
+  }
+
+
+  /**
+   * Count Type SectionCountOutputType
+   */
+
+  export type SectionCountOutputType = {
+    lessons: number
+  }
+
+  export type SectionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lessons?: boolean | SectionCountOutputTypeCountLessonsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * SectionCountOutputType without action
+   */
+  export type SectionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SectionCountOutputType
+     */
+    select?: SectionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * SectionCountOutputType without action
+   */
+  export type SectionCountOutputTypeCountLessonsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LessonWhereInput
   }
 
 
@@ -3489,1096 +3611,6 @@ export namespace Prisma {
 
 
   /**
-   * Model Section
-   */
-
-  export type AggregateSection = {
-    _count: SectionCountAggregateOutputType | null
-    _min: SectionMinAggregateOutputType | null
-    _max: SectionMaxAggregateOutputType | null
-  }
-
-  export type SectionMinAggregateOutputType = {
-    id: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    name: string | null
-    slug: string | null
-    courseId: string | null
-  }
-
-  export type SectionMaxAggregateOutputType = {
-    id: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-    name: string | null
-    slug: string | null
-    courseId: string | null
-  }
-
-  export type SectionCountAggregateOutputType = {
-    id: number
-    createdAt: number
-    updatedAt: number
-    name: number
-    slug: number
-    courseId: number
-    _all: number
-  }
-
-
-  export type SectionMinAggregateInputType = {
-    id?: true
-    createdAt?: true
-    updatedAt?: true
-    name?: true
-    slug?: true
-    courseId?: true
-  }
-
-  export type SectionMaxAggregateInputType = {
-    id?: true
-    createdAt?: true
-    updatedAt?: true
-    name?: true
-    slug?: true
-    courseId?: true
-  }
-
-  export type SectionCountAggregateInputType = {
-    id?: true
-    createdAt?: true
-    updatedAt?: true
-    name?: true
-    slug?: true
-    courseId?: true
-    _all?: true
-  }
-
-  export type SectionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Section to aggregate.
-     */
-    where?: SectionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Sections to fetch.
-     */
-    orderBy?: SectionOrderByWithRelationInput | SectionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: SectionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Sections from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Sections.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Sections
-    **/
-    _count?: true | SectionCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: SectionMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: SectionMaxAggregateInputType
-  }
-
-  export type GetSectionAggregateType<T extends SectionAggregateArgs> = {
-        [P in keyof T & keyof AggregateSection]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateSection[P]>
-      : GetScalarType<T[P], AggregateSection[P]>
-  }
-
-
-
-
-  export type SectionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SectionWhereInput
-    orderBy?: SectionOrderByWithAggregationInput | SectionOrderByWithAggregationInput[]
-    by: SectionScalarFieldEnum[] | SectionScalarFieldEnum
-    having?: SectionScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: SectionCountAggregateInputType | true
-    _min?: SectionMinAggregateInputType
-    _max?: SectionMaxAggregateInputType
-  }
-
-  export type SectionGroupByOutputType = {
-    id: string
-    createdAt: Date
-    updatedAt: Date
-    name: string
-    slug: string
-    courseId: string | null
-    _count: SectionCountAggregateOutputType | null
-    _min: SectionMinAggregateOutputType | null
-    _max: SectionMaxAggregateOutputType | null
-  }
-
-  type GetSectionGroupByPayload<T extends SectionGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<SectionGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof SectionGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], SectionGroupByOutputType[P]>
-            : GetScalarType<T[P], SectionGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type SectionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    name?: boolean
-    slug?: boolean
-    courseId?: boolean
-    course?: boolean | Section$courseArgs<ExtArgs>
-  }, ExtArgs["result"]["section"]>
-
-  export type SectionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    name?: boolean
-    slug?: boolean
-    courseId?: boolean
-    course?: boolean | Section$courseArgs<ExtArgs>
-  }, ExtArgs["result"]["section"]>
-
-  export type SectionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    name?: boolean
-    slug?: boolean
-    courseId?: boolean
-    course?: boolean | Section$courseArgs<ExtArgs>
-  }, ExtArgs["result"]["section"]>
-
-  export type SectionSelectScalar = {
-    id?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    name?: boolean
-    slug?: boolean
-    courseId?: boolean
-  }
-
-  export type SectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "name" | "slug" | "courseId", ExtArgs["result"]["section"]>
-  export type SectionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    course?: boolean | Section$courseArgs<ExtArgs>
-  }
-  export type SectionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    course?: boolean | Section$courseArgs<ExtArgs>
-  }
-  export type SectionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    course?: boolean | Section$courseArgs<ExtArgs>
-  }
-
-  export type $SectionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "Section"
-    objects: {
-      course: Prisma.$CoursePayload<ExtArgs> | null
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      createdAt: Date
-      updatedAt: Date
-      name: string
-      slug: string
-      courseId: string | null
-    }, ExtArgs["result"]["section"]>
-    composites: {}
-  }
-
-  type SectionGetPayload<S extends boolean | null | undefined | SectionDefaultArgs> = $Result.GetResult<Prisma.$SectionPayload, S>
-
-  type SectionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SectionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: SectionCountAggregateInputType | true
-    }
-
-  export interface SectionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Section'], meta: { name: 'Section' } }
-    /**
-     * Find zero or one Section that matches the filter.
-     * @param {SectionFindUniqueArgs} args - Arguments to find a Section
-     * @example
-     * // Get one Section
-     * const section = await prisma.section.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends SectionFindUniqueArgs>(args: SelectSubset<T, SectionFindUniqueArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find one Section that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {SectionFindUniqueOrThrowArgs} args - Arguments to find a Section
-     * @example
-     * // Get one Section
-     * const section = await prisma.section.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends SectionFindUniqueOrThrowArgs>(args: SelectSubset<T, SectionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first Section that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SectionFindFirstArgs} args - Arguments to find a Section
-     * @example
-     * // Get one Section
-     * const section = await prisma.section.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends SectionFindFirstArgs>(args?: SelectSubset<T, SectionFindFirstArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
-
-    /**
-     * Find the first Section that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SectionFindFirstOrThrowArgs} args - Arguments to find a Section
-     * @example
-     * // Get one Section
-     * const section = await prisma.section.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends SectionFindFirstOrThrowArgs>(args?: SelectSubset<T, SectionFindFirstOrThrowArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Find zero or more Sections that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SectionFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Sections
-     * const sections = await prisma.section.findMany()
-     * 
-     * // Get first 10 Sections
-     * const sections = await prisma.section.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const sectionWithIdOnly = await prisma.section.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends SectionFindManyArgs>(args?: SelectSubset<T, SectionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "findMany", ClientOptions>>
-
-    /**
-     * Create a Section.
-     * @param {SectionCreateArgs} args - Arguments to create a Section.
-     * @example
-     * // Create one Section
-     * const Section = await prisma.section.create({
-     *   data: {
-     *     // ... data to create a Section
-     *   }
-     * })
-     * 
-     */
-    create<T extends SectionCreateArgs>(args: SelectSubset<T, SectionCreateArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Create many Sections.
-     * @param {SectionCreateManyArgs} args - Arguments to create many Sections.
-     * @example
-     * // Create many Sections
-     * const section = await prisma.section.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends SectionCreateManyArgs>(args?: SelectSubset<T, SectionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Sections and returns the data saved in the database.
-     * @param {SectionCreateManyAndReturnArgs} args - Arguments to create many Sections.
-     * @example
-     * // Create many Sections
-     * const section = await prisma.section.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Sections and only return the `id`
-     * const sectionWithIdOnly = await prisma.section.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends SectionCreateManyAndReturnArgs>(args?: SelectSubset<T, SectionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
-
-    /**
-     * Delete a Section.
-     * @param {SectionDeleteArgs} args - Arguments to delete one Section.
-     * @example
-     * // Delete one Section
-     * const Section = await prisma.section.delete({
-     *   where: {
-     *     // ... filter to delete one Section
-     *   }
-     * })
-     * 
-     */
-    delete<T extends SectionDeleteArgs>(args: SelectSubset<T, SectionDeleteArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Update one Section.
-     * @param {SectionUpdateArgs} args - Arguments to update one Section.
-     * @example
-     * // Update one Section
-     * const section = await prisma.section.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends SectionUpdateArgs>(args: SelectSubset<T, SectionUpdateArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
-
-    /**
-     * Delete zero or more Sections.
-     * @param {SectionDeleteManyArgs} args - Arguments to filter Sections to delete.
-     * @example
-     * // Delete a few Sections
-     * const { count } = await prisma.section.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends SectionDeleteManyArgs>(args?: SelectSubset<T, SectionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Sections.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SectionUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Sections
-     * const section = await prisma.section.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends SectionUpdateManyArgs>(args: SelectSubset<T, SectionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Sections and returns the data updated in the database.
-     * @param {SectionUpdateManyAndReturnArgs} args - Arguments to update many Sections.
-     * @example
-     * // Update many Sections
-     * const section = await prisma.section.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Sections and only return the `id`
-     * const sectionWithIdOnly = await prisma.section.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends SectionUpdateManyAndReturnArgs>(args: SelectSubset<T, SectionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
-
-    /**
-     * Create or update one Section.
-     * @param {SectionUpsertArgs} args - Arguments to update or create a Section.
-     * @example
-     * // Update or create a Section
-     * const section = await prisma.section.upsert({
-     *   create: {
-     *     // ... data to create a Section
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Section we want to update
-     *   }
-     * })
-     */
-    upsert<T extends SectionUpsertArgs>(args: SelectSubset<T, SectionUpsertArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
-
-
-    /**
-     * Count the number of Sections.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SectionCountArgs} args - Arguments to filter Sections to count.
-     * @example
-     * // Count the number of Sections
-     * const count = await prisma.section.count({
-     *   where: {
-     *     // ... the filter for the Sections we want to count
-     *   }
-     * })
-    **/
-    count<T extends SectionCountArgs>(
-      args?: Subset<T, SectionCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], SectionCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Section.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SectionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends SectionAggregateArgs>(args: Subset<T, SectionAggregateArgs>): Prisma.PrismaPromise<GetSectionAggregateType<T>>
-
-    /**
-     * Group by Section.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SectionGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends SectionGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SectionGroupByArgs['orderBy'] }
-        : { orderBy?: SectionGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, SectionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSectionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Section model
-   */
-  readonly fields: SectionFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Section.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__SectionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    course<T extends Section$courseArgs<ExtArgs> = {}>(args?: Subset<T, Section$courseArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the Section model
-   */ 
-  interface SectionFieldRefs {
-    readonly id: FieldRef<"Section", 'String'>
-    readonly createdAt: FieldRef<"Section", 'DateTime'>
-    readonly updatedAt: FieldRef<"Section", 'DateTime'>
-    readonly name: FieldRef<"Section", 'String'>
-    readonly slug: FieldRef<"Section", 'String'>
-    readonly courseId: FieldRef<"Section", 'String'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * Section findUnique
-   */
-  export type SectionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Section
-     */
-    select?: SectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Section
-     */
-    omit?: SectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SectionInclude<ExtArgs> | null
-    /**
-     * Filter, which Section to fetch.
-     */
-    where: SectionWhereUniqueInput
-  }
-
-  /**
-   * Section findUniqueOrThrow
-   */
-  export type SectionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Section
-     */
-    select?: SectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Section
-     */
-    omit?: SectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SectionInclude<ExtArgs> | null
-    /**
-     * Filter, which Section to fetch.
-     */
-    where: SectionWhereUniqueInput
-  }
-
-  /**
-   * Section findFirst
-   */
-  export type SectionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Section
-     */
-    select?: SectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Section
-     */
-    omit?: SectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SectionInclude<ExtArgs> | null
-    /**
-     * Filter, which Section to fetch.
-     */
-    where?: SectionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Sections to fetch.
-     */
-    orderBy?: SectionOrderByWithRelationInput | SectionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Sections.
-     */
-    cursor?: SectionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Sections from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Sections.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Sections.
-     */
-    distinct?: SectionScalarFieldEnum | SectionScalarFieldEnum[]
-  }
-
-  /**
-   * Section findFirstOrThrow
-   */
-  export type SectionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Section
-     */
-    select?: SectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Section
-     */
-    omit?: SectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SectionInclude<ExtArgs> | null
-    /**
-     * Filter, which Section to fetch.
-     */
-    where?: SectionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Sections to fetch.
-     */
-    orderBy?: SectionOrderByWithRelationInput | SectionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Sections.
-     */
-    cursor?: SectionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Sections from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Sections.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Sections.
-     */
-    distinct?: SectionScalarFieldEnum | SectionScalarFieldEnum[]
-  }
-
-  /**
-   * Section findMany
-   */
-  export type SectionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Section
-     */
-    select?: SectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Section
-     */
-    omit?: SectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SectionInclude<ExtArgs> | null
-    /**
-     * Filter, which Sections to fetch.
-     */
-    where?: SectionWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Sections to fetch.
-     */
-    orderBy?: SectionOrderByWithRelationInput | SectionOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Sections.
-     */
-    cursor?: SectionWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Sections from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Sections.
-     */
-    skip?: number
-    distinct?: SectionScalarFieldEnum | SectionScalarFieldEnum[]
-  }
-
-  /**
-   * Section create
-   */
-  export type SectionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Section
-     */
-    select?: SectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Section
-     */
-    omit?: SectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SectionInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Section.
-     */
-    data: XOR<SectionCreateInput, SectionUncheckedCreateInput>
-  }
-
-  /**
-   * Section createMany
-   */
-  export type SectionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Sections.
-     */
-    data: SectionCreateManyInput | SectionCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * Section createManyAndReturn
-   */
-  export type SectionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Section
-     */
-    select?: SectionSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Section
-     */
-    omit?: SectionOmit<ExtArgs> | null
-    /**
-     * The data used to create many Sections.
-     */
-    data: SectionCreateManyInput | SectionCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SectionIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Section update
-   */
-  export type SectionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Section
-     */
-    select?: SectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Section
-     */
-    omit?: SectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SectionInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Section.
-     */
-    data: XOR<SectionUpdateInput, SectionUncheckedUpdateInput>
-    /**
-     * Choose, which Section to update.
-     */
-    where: SectionWhereUniqueInput
-  }
-
-  /**
-   * Section updateMany
-   */
-  export type SectionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Sections.
-     */
-    data: XOR<SectionUpdateManyMutationInput, SectionUncheckedUpdateManyInput>
-    /**
-     * Filter which Sections to update
-     */
-    where?: SectionWhereInput
-    /**
-     * Limit how many Sections to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * Section updateManyAndReturn
-   */
-  export type SectionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Section
-     */
-    select?: SectionSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the Section
-     */
-    omit?: SectionOmit<ExtArgs> | null
-    /**
-     * The data used to update Sections.
-     */
-    data: XOR<SectionUpdateManyMutationInput, SectionUncheckedUpdateManyInput>
-    /**
-     * Filter which Sections to update
-     */
-    where?: SectionWhereInput
-    /**
-     * Limit how many Sections to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SectionIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * Section upsert
-   */
-  export type SectionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Section
-     */
-    select?: SectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Section
-     */
-    omit?: SectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SectionInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Section to update in case it exists.
-     */
-    where: SectionWhereUniqueInput
-    /**
-     * In case the Section found by the `where` argument doesn't exist, create a new Section with this data.
-     */
-    create: XOR<SectionCreateInput, SectionUncheckedCreateInput>
-    /**
-     * In case the Section was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<SectionUpdateInput, SectionUncheckedUpdateInput>
-  }
-
-  /**
-   * Section delete
-   */
-  export type SectionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Section
-     */
-    select?: SectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Section
-     */
-    omit?: SectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SectionInclude<ExtArgs> | null
-    /**
-     * Filter which Section to delete.
-     */
-    where: SectionWhereUniqueInput
-  }
-
-  /**
-   * Section deleteMany
-   */
-  export type SectionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Sections to delete
-     */
-    where?: SectionWhereInput
-    /**
-     * Limit how many Sections to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * Section.course
-   */
-  export type Section$courseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Course
-     */
-    select?: CourseSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Course
-     */
-    omit?: CourseOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: CourseInclude<ExtArgs> | null
-    where?: CourseWhereInput
-  }
-
-  /**
-   * Section without action
-   */
-  export type SectionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Section
-     */
-    select?: SectionSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Section
-     */
-    omit?: SectionOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SectionInclude<ExtArgs> | null
-  }
-
-
-  /**
    * Model Direction
    */
 
@@ -5649,6 +4681,2257 @@ export namespace Prisma {
 
 
   /**
+   * Model Section
+   */
+
+  export type AggregateSection = {
+    _count: SectionCountAggregateOutputType | null
+    _min: SectionMinAggregateOutputType | null
+    _max: SectionMaxAggregateOutputType | null
+  }
+
+  export type SectionMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    name: string | null
+    slug: string | null
+    courseId: string | null
+  }
+
+  export type SectionMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    name: string | null
+    slug: string | null
+    courseId: string | null
+  }
+
+  export type SectionCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    updatedAt: number
+    name: number
+    slug: number
+    courseId: number
+    _all: number
+  }
+
+
+  export type SectionMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    name?: true
+    slug?: true
+    courseId?: true
+  }
+
+  export type SectionMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    name?: true
+    slug?: true
+    courseId?: true
+  }
+
+  export type SectionCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    name?: true
+    slug?: true
+    courseId?: true
+    _all?: true
+  }
+
+  export type SectionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Section to aggregate.
+     */
+    where?: SectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sections to fetch.
+     */
+    orderBy?: SectionOrderByWithRelationInput | SectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Sections
+    **/
+    _count?: true | SectionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SectionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SectionMaxAggregateInputType
+  }
+
+  export type GetSectionAggregateType<T extends SectionAggregateArgs> = {
+        [P in keyof T & keyof AggregateSection]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSection[P]>
+      : GetScalarType<T[P], AggregateSection[P]>
+  }
+
+
+
+
+  export type SectionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SectionWhereInput
+    orderBy?: SectionOrderByWithAggregationInput | SectionOrderByWithAggregationInput[]
+    by: SectionScalarFieldEnum[] | SectionScalarFieldEnum
+    having?: SectionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SectionCountAggregateInputType | true
+    _min?: SectionMinAggregateInputType
+    _max?: SectionMaxAggregateInputType
+  }
+
+  export type SectionGroupByOutputType = {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+    name: string
+    slug: string
+    courseId: string | null
+    _count: SectionCountAggregateOutputType | null
+    _min: SectionMinAggregateOutputType | null
+    _max: SectionMaxAggregateOutputType | null
+  }
+
+  type GetSectionGroupByPayload<T extends SectionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SectionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SectionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SectionGroupByOutputType[P]>
+            : GetScalarType<T[P], SectionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SectionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    name?: boolean
+    slug?: boolean
+    courseId?: boolean
+    lessons?: boolean | Section$lessonsArgs<ExtArgs>
+    course?: boolean | Section$courseArgs<ExtArgs>
+    _count?: boolean | SectionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["section"]>
+
+  export type SectionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    name?: boolean
+    slug?: boolean
+    courseId?: boolean
+    course?: boolean | Section$courseArgs<ExtArgs>
+  }, ExtArgs["result"]["section"]>
+
+  export type SectionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    name?: boolean
+    slug?: boolean
+    courseId?: boolean
+    course?: boolean | Section$courseArgs<ExtArgs>
+  }, ExtArgs["result"]["section"]>
+
+  export type SectionSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    name?: boolean
+    slug?: boolean
+    courseId?: boolean
+  }
+
+  export type SectionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "name" | "slug" | "courseId", ExtArgs["result"]["section"]>
+  export type SectionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    lessons?: boolean | Section$lessonsArgs<ExtArgs>
+    course?: boolean | Section$courseArgs<ExtArgs>
+    _count?: boolean | SectionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SectionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | Section$courseArgs<ExtArgs>
+  }
+  export type SectionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | Section$courseArgs<ExtArgs>
+  }
+
+  export type $SectionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Section"
+    objects: {
+      lessons: Prisma.$LessonPayload<ExtArgs>[]
+      course: Prisma.$CoursePayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createdAt: Date
+      updatedAt: Date
+      name: string
+      slug: string
+      courseId: string | null
+    }, ExtArgs["result"]["section"]>
+    composites: {}
+  }
+
+  type SectionGetPayload<S extends boolean | null | undefined | SectionDefaultArgs> = $Result.GetResult<Prisma.$SectionPayload, S>
+
+  type SectionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SectionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SectionCountAggregateInputType | true
+    }
+
+  export interface SectionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Section'], meta: { name: 'Section' } }
+    /**
+     * Find zero or one Section that matches the filter.
+     * @param {SectionFindUniqueArgs} args - Arguments to find a Section
+     * @example
+     * // Get one Section
+     * const section = await prisma.section.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SectionFindUniqueArgs>(args: SelectSubset<T, SectionFindUniqueArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one Section that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SectionFindUniqueOrThrowArgs} args - Arguments to find a Section
+     * @example
+     * // Get one Section
+     * const section = await prisma.section.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SectionFindUniqueOrThrowArgs>(args: SelectSubset<T, SectionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Section that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SectionFindFirstArgs} args - Arguments to find a Section
+     * @example
+     * // Get one Section
+     * const section = await prisma.section.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SectionFindFirstArgs>(args?: SelectSubset<T, SectionFindFirstArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Section that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SectionFindFirstOrThrowArgs} args - Arguments to find a Section
+     * @example
+     * // Get one Section
+     * const section = await prisma.section.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SectionFindFirstOrThrowArgs>(args?: SelectSubset<T, SectionFindFirstOrThrowArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more Sections that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SectionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Sections
+     * const sections = await prisma.section.findMany()
+     * 
+     * // Get first 10 Sections
+     * const sections = await prisma.section.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const sectionWithIdOnly = await prisma.section.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SectionFindManyArgs>(args?: SelectSubset<T, SectionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a Section.
+     * @param {SectionCreateArgs} args - Arguments to create a Section.
+     * @example
+     * // Create one Section
+     * const Section = await prisma.section.create({
+     *   data: {
+     *     // ... data to create a Section
+     *   }
+     * })
+     * 
+     */
+    create<T extends SectionCreateArgs>(args: SelectSubset<T, SectionCreateArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many Sections.
+     * @param {SectionCreateManyArgs} args - Arguments to create many Sections.
+     * @example
+     * // Create many Sections
+     * const section = await prisma.section.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SectionCreateManyArgs>(args?: SelectSubset<T, SectionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Sections and returns the data saved in the database.
+     * @param {SectionCreateManyAndReturnArgs} args - Arguments to create many Sections.
+     * @example
+     * // Create many Sections
+     * const section = await prisma.section.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Sections and only return the `id`
+     * const sectionWithIdOnly = await prisma.section.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SectionCreateManyAndReturnArgs>(args?: SelectSubset<T, SectionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a Section.
+     * @param {SectionDeleteArgs} args - Arguments to delete one Section.
+     * @example
+     * // Delete one Section
+     * const Section = await prisma.section.delete({
+     *   where: {
+     *     // ... filter to delete one Section
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SectionDeleteArgs>(args: SelectSubset<T, SectionDeleteArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one Section.
+     * @param {SectionUpdateArgs} args - Arguments to update one Section.
+     * @example
+     * // Update one Section
+     * const section = await prisma.section.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SectionUpdateArgs>(args: SelectSubset<T, SectionUpdateArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more Sections.
+     * @param {SectionDeleteManyArgs} args - Arguments to filter Sections to delete.
+     * @example
+     * // Delete a few Sections
+     * const { count } = await prisma.section.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SectionDeleteManyArgs>(args?: SelectSubset<T, SectionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sections.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SectionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Sections
+     * const section = await prisma.section.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SectionUpdateManyArgs>(args: SelectSubset<T, SectionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Sections and returns the data updated in the database.
+     * @param {SectionUpdateManyAndReturnArgs} args - Arguments to update many Sections.
+     * @example
+     * // Update many Sections
+     * const section = await prisma.section.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Sections and only return the `id`
+     * const sectionWithIdOnly = await prisma.section.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SectionUpdateManyAndReturnArgs>(args: SelectSubset<T, SectionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one Section.
+     * @param {SectionUpsertArgs} args - Arguments to update or create a Section.
+     * @example
+     * // Update or create a Section
+     * const section = await prisma.section.upsert({
+     *   create: {
+     *     // ... data to create a Section
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Section we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SectionUpsertArgs>(args: SelectSubset<T, SectionUpsertArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of Sections.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SectionCountArgs} args - Arguments to filter Sections to count.
+     * @example
+     * // Count the number of Sections
+     * const count = await prisma.section.count({
+     *   where: {
+     *     // ... the filter for the Sections we want to count
+     *   }
+     * })
+    **/
+    count<T extends SectionCountArgs>(
+      args?: Subset<T, SectionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SectionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Section.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SectionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SectionAggregateArgs>(args: Subset<T, SectionAggregateArgs>): Prisma.PrismaPromise<GetSectionAggregateType<T>>
+
+    /**
+     * Group by Section.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SectionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SectionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SectionGroupByArgs['orderBy'] }
+        : { orderBy?: SectionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SectionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSectionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Section model
+   */
+  readonly fields: SectionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Section.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SectionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    lessons<T extends Section$lessonsArgs<ExtArgs> = {}>(args?: Subset<T, Section$lessonsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "findMany", ClientOptions> | Null>
+    course<T extends Section$courseArgs<ExtArgs> = {}>(args?: Subset<T, Section$courseArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | null, null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Section model
+   */ 
+  interface SectionFieldRefs {
+    readonly id: FieldRef<"Section", 'String'>
+    readonly createdAt: FieldRef<"Section", 'DateTime'>
+    readonly updatedAt: FieldRef<"Section", 'DateTime'>
+    readonly name: FieldRef<"Section", 'String'>
+    readonly slug: FieldRef<"Section", 'String'>
+    readonly courseId: FieldRef<"Section", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Section findUnique
+   */
+  export type SectionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Section
+     */
+    select?: SectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Section
+     */
+    omit?: SectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionInclude<ExtArgs> | null
+    /**
+     * Filter, which Section to fetch.
+     */
+    where: SectionWhereUniqueInput
+  }
+
+  /**
+   * Section findUniqueOrThrow
+   */
+  export type SectionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Section
+     */
+    select?: SectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Section
+     */
+    omit?: SectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionInclude<ExtArgs> | null
+    /**
+     * Filter, which Section to fetch.
+     */
+    where: SectionWhereUniqueInput
+  }
+
+  /**
+   * Section findFirst
+   */
+  export type SectionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Section
+     */
+    select?: SectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Section
+     */
+    omit?: SectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionInclude<ExtArgs> | null
+    /**
+     * Filter, which Section to fetch.
+     */
+    where?: SectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sections to fetch.
+     */
+    orderBy?: SectionOrderByWithRelationInput | SectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Sections.
+     */
+    cursor?: SectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sections.
+     */
+    distinct?: SectionScalarFieldEnum | SectionScalarFieldEnum[]
+  }
+
+  /**
+   * Section findFirstOrThrow
+   */
+  export type SectionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Section
+     */
+    select?: SectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Section
+     */
+    omit?: SectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionInclude<ExtArgs> | null
+    /**
+     * Filter, which Section to fetch.
+     */
+    where?: SectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sections to fetch.
+     */
+    orderBy?: SectionOrderByWithRelationInput | SectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Sections.
+     */
+    cursor?: SectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sections.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Sections.
+     */
+    distinct?: SectionScalarFieldEnum | SectionScalarFieldEnum[]
+  }
+
+  /**
+   * Section findMany
+   */
+  export type SectionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Section
+     */
+    select?: SectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Section
+     */
+    omit?: SectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionInclude<ExtArgs> | null
+    /**
+     * Filter, which Sections to fetch.
+     */
+    where?: SectionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Sections to fetch.
+     */
+    orderBy?: SectionOrderByWithRelationInput | SectionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Sections.
+     */
+    cursor?: SectionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Sections from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Sections.
+     */
+    skip?: number
+    distinct?: SectionScalarFieldEnum | SectionScalarFieldEnum[]
+  }
+
+  /**
+   * Section create
+   */
+  export type SectionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Section
+     */
+    select?: SectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Section
+     */
+    omit?: SectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Section.
+     */
+    data: XOR<SectionCreateInput, SectionUncheckedCreateInput>
+  }
+
+  /**
+   * Section createMany
+   */
+  export type SectionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Sections.
+     */
+    data: SectionCreateManyInput | SectionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Section createManyAndReturn
+   */
+  export type SectionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Section
+     */
+    select?: SectionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Section
+     */
+    omit?: SectionOmit<ExtArgs> | null
+    /**
+     * The data used to create many Sections.
+     */
+    data: SectionCreateManyInput | SectionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Section update
+   */
+  export type SectionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Section
+     */
+    select?: SectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Section
+     */
+    omit?: SectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Section.
+     */
+    data: XOR<SectionUpdateInput, SectionUncheckedUpdateInput>
+    /**
+     * Choose, which Section to update.
+     */
+    where: SectionWhereUniqueInput
+  }
+
+  /**
+   * Section updateMany
+   */
+  export type SectionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Sections.
+     */
+    data: XOR<SectionUpdateManyMutationInput, SectionUncheckedUpdateManyInput>
+    /**
+     * Filter which Sections to update
+     */
+    where?: SectionWhereInput
+    /**
+     * Limit how many Sections to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Section updateManyAndReturn
+   */
+  export type SectionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Section
+     */
+    select?: SectionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Section
+     */
+    omit?: SectionOmit<ExtArgs> | null
+    /**
+     * The data used to update Sections.
+     */
+    data: XOR<SectionUpdateManyMutationInput, SectionUncheckedUpdateManyInput>
+    /**
+     * Filter which Sections to update
+     */
+    where?: SectionWhereInput
+    /**
+     * Limit how many Sections to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Section upsert
+   */
+  export type SectionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Section
+     */
+    select?: SectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Section
+     */
+    omit?: SectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Section to update in case it exists.
+     */
+    where: SectionWhereUniqueInput
+    /**
+     * In case the Section found by the `where` argument doesn't exist, create a new Section with this data.
+     */
+    create: XOR<SectionCreateInput, SectionUncheckedCreateInput>
+    /**
+     * In case the Section was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SectionUpdateInput, SectionUncheckedUpdateInput>
+  }
+
+  /**
+   * Section delete
+   */
+  export type SectionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Section
+     */
+    select?: SectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Section
+     */
+    omit?: SectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionInclude<ExtArgs> | null
+    /**
+     * Filter which Section to delete.
+     */
+    where: SectionWhereUniqueInput
+  }
+
+  /**
+   * Section deleteMany
+   */
+  export type SectionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Sections to delete
+     */
+    where?: SectionWhereInput
+    /**
+     * Limit how many Sections to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Section.lessons
+   */
+  export type Section$lessonsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lesson
+     */
+    select?: LessonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lesson
+     */
+    omit?: LessonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LessonInclude<ExtArgs> | null
+    where?: LessonWhereInput
+    orderBy?: LessonOrderByWithRelationInput | LessonOrderByWithRelationInput[]
+    cursor?: LessonWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: LessonScalarFieldEnum | LessonScalarFieldEnum[]
+  }
+
+  /**
+   * Section.course
+   */
+  export type Section$courseArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Course
+     */
+    select?: CourseSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Course
+     */
+    omit?: CourseOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CourseInclude<ExtArgs> | null
+    where?: CourseWhereInput
+  }
+
+  /**
+   * Section without action
+   */
+  export type SectionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Section
+     */
+    select?: SectionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Section
+     */
+    omit?: SectionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SectionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Lesson
+   */
+
+  export type AggregateLesson = {
+    _count: LessonCountAggregateOutputType | null
+    _avg: LessonAvgAggregateOutputType | null
+    _sum: LessonSumAggregateOutputType | null
+    _min: LessonMinAggregateOutputType | null
+    _max: LessonMaxAggregateOutputType | null
+  }
+
+  export type LessonAvgAggregateOutputType = {
+    order: number | null
+  }
+
+  export type LessonSumAggregateOutputType = {
+    order: number | null
+  }
+
+  export type LessonMinAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    title: string | null
+    slug: string | null
+    videoUrl: string | null
+    order: number | null
+    sectionId: string | null
+  }
+
+  export type LessonMaxAggregateOutputType = {
+    id: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    title: string | null
+    slug: string | null
+    videoUrl: string | null
+    order: number | null
+    sectionId: string | null
+  }
+
+  export type LessonCountAggregateOutputType = {
+    id: number
+    createdAt: number
+    updatedAt: number
+    title: number
+    slug: number
+    videoUrl: number
+    order: number
+    sectionId: number
+    _all: number
+  }
+
+
+  export type LessonAvgAggregateInputType = {
+    order?: true
+  }
+
+  export type LessonSumAggregateInputType = {
+    order?: true
+  }
+
+  export type LessonMinAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    title?: true
+    slug?: true
+    videoUrl?: true
+    order?: true
+    sectionId?: true
+  }
+
+  export type LessonMaxAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    title?: true
+    slug?: true
+    videoUrl?: true
+    order?: true
+    sectionId?: true
+  }
+
+  export type LessonCountAggregateInputType = {
+    id?: true
+    createdAt?: true
+    updatedAt?: true
+    title?: true
+    slug?: true
+    videoUrl?: true
+    order?: true
+    sectionId?: true
+    _all?: true
+  }
+
+  export type LessonAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Lesson to aggregate.
+     */
+    where?: LessonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Lessons to fetch.
+     */
+    orderBy?: LessonOrderByWithRelationInput | LessonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: LessonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Lessons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Lessons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Lessons
+    **/
+    _count?: true | LessonCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: LessonAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: LessonSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: LessonMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: LessonMaxAggregateInputType
+  }
+
+  export type GetLessonAggregateType<T extends LessonAggregateArgs> = {
+        [P in keyof T & keyof AggregateLesson]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateLesson[P]>
+      : GetScalarType<T[P], AggregateLesson[P]>
+  }
+
+
+
+
+  export type LessonGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: LessonWhereInput
+    orderBy?: LessonOrderByWithAggregationInput | LessonOrderByWithAggregationInput[]
+    by: LessonScalarFieldEnum[] | LessonScalarFieldEnum
+    having?: LessonScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: LessonCountAggregateInputType | true
+    _avg?: LessonAvgAggregateInputType
+    _sum?: LessonSumAggregateInputType
+    _min?: LessonMinAggregateInputType
+    _max?: LessonMaxAggregateInputType
+  }
+
+  export type LessonGroupByOutputType = {
+    id: string
+    createdAt: Date
+    updatedAt: Date
+    title: string
+    slug: string
+    videoUrl: string
+    order: number
+    sectionId: string
+    _count: LessonCountAggregateOutputType | null
+    _avg: LessonAvgAggregateOutputType | null
+    _sum: LessonSumAggregateOutputType | null
+    _min: LessonMinAggregateOutputType | null
+    _max: LessonMaxAggregateOutputType | null
+  }
+
+  type GetLessonGroupByPayload<T extends LessonGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<LessonGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof LessonGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], LessonGroupByOutputType[P]>
+            : GetScalarType<T[P], LessonGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type LessonSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    title?: boolean
+    slug?: boolean
+    videoUrl?: boolean
+    order?: boolean
+    sectionId?: boolean
+    section?: boolean | SectionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["lesson"]>
+
+  export type LessonSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    title?: boolean
+    slug?: boolean
+    videoUrl?: boolean
+    order?: boolean
+    sectionId?: boolean
+    section?: boolean | SectionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["lesson"]>
+
+  export type LessonSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    title?: boolean
+    slug?: boolean
+    videoUrl?: boolean
+    order?: boolean
+    sectionId?: boolean
+    section?: boolean | SectionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["lesson"]>
+
+  export type LessonSelectScalar = {
+    id?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    title?: boolean
+    slug?: boolean
+    videoUrl?: boolean
+    order?: boolean
+    sectionId?: boolean
+  }
+
+  export type LessonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "createdAt" | "updatedAt" | "title" | "slug" | "videoUrl" | "order" | "sectionId", ExtArgs["result"]["lesson"]>
+  export type LessonInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    section?: boolean | SectionDefaultArgs<ExtArgs>
+  }
+  export type LessonIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    section?: boolean | SectionDefaultArgs<ExtArgs>
+  }
+  export type LessonIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    section?: boolean | SectionDefaultArgs<ExtArgs>
+  }
+
+  export type $LessonPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Lesson"
+    objects: {
+      section: Prisma.$SectionPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      createdAt: Date
+      updatedAt: Date
+      title: string
+      slug: string
+      videoUrl: string
+      order: number
+      sectionId: string
+    }, ExtArgs["result"]["lesson"]>
+    composites: {}
+  }
+
+  type LessonGetPayload<S extends boolean | null | undefined | LessonDefaultArgs> = $Result.GetResult<Prisma.$LessonPayload, S>
+
+  type LessonCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<LessonFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: LessonCountAggregateInputType | true
+    }
+
+  export interface LessonDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Lesson'], meta: { name: 'Lesson' } }
+    /**
+     * Find zero or one Lesson that matches the filter.
+     * @param {LessonFindUniqueArgs} args - Arguments to find a Lesson
+     * @example
+     * // Get one Lesson
+     * const lesson = await prisma.lesson.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends LessonFindUniqueArgs>(args: SelectSubset<T, LessonFindUniqueArgs<ExtArgs>>): Prisma__LessonClient<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "findUnique", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find one Lesson that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {LessonFindUniqueOrThrowArgs} args - Arguments to find a Lesson
+     * @example
+     * // Get one Lesson
+     * const lesson = await prisma.lesson.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends LessonFindUniqueOrThrowArgs>(args: SelectSubset<T, LessonFindUniqueOrThrowArgs<ExtArgs>>): Prisma__LessonClient<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Lesson that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LessonFindFirstArgs} args - Arguments to find a Lesson
+     * @example
+     * // Get one Lesson
+     * const lesson = await prisma.lesson.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends LessonFindFirstArgs>(args?: SelectSubset<T, LessonFindFirstArgs<ExtArgs>>): Prisma__LessonClient<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "findFirst", ClientOptions> | null, null, ExtArgs, ClientOptions>
+
+    /**
+     * Find the first Lesson that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LessonFindFirstOrThrowArgs} args - Arguments to find a Lesson
+     * @example
+     * // Get one Lesson
+     * const lesson = await prisma.lesson.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends LessonFindFirstOrThrowArgs>(args?: SelectSubset<T, LessonFindFirstOrThrowArgs<ExtArgs>>): Prisma__LessonClient<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "findFirstOrThrow", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Find zero or more Lessons that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LessonFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Lessons
+     * const lessons = await prisma.lesson.findMany()
+     * 
+     * // Get first 10 Lessons
+     * const lessons = await prisma.lesson.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const lessonWithIdOnly = await prisma.lesson.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends LessonFindManyArgs>(args?: SelectSubset<T, LessonFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "findMany", ClientOptions>>
+
+    /**
+     * Create a Lesson.
+     * @param {LessonCreateArgs} args - Arguments to create a Lesson.
+     * @example
+     * // Create one Lesson
+     * const Lesson = await prisma.lesson.create({
+     *   data: {
+     *     // ... data to create a Lesson
+     *   }
+     * })
+     * 
+     */
+    create<T extends LessonCreateArgs>(args: SelectSubset<T, LessonCreateArgs<ExtArgs>>): Prisma__LessonClient<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "create", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Create many Lessons.
+     * @param {LessonCreateManyArgs} args - Arguments to create many Lessons.
+     * @example
+     * // Create many Lessons
+     * const lesson = await prisma.lesson.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends LessonCreateManyArgs>(args?: SelectSubset<T, LessonCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Lessons and returns the data saved in the database.
+     * @param {LessonCreateManyAndReturnArgs} args - Arguments to create many Lessons.
+     * @example
+     * // Create many Lessons
+     * const lesson = await prisma.lesson.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Lessons and only return the `id`
+     * const lessonWithIdOnly = await prisma.lesson.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends LessonCreateManyAndReturnArgs>(args?: SelectSubset<T, LessonCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "createManyAndReturn", ClientOptions>>
+
+    /**
+     * Delete a Lesson.
+     * @param {LessonDeleteArgs} args - Arguments to delete one Lesson.
+     * @example
+     * // Delete one Lesson
+     * const Lesson = await prisma.lesson.delete({
+     *   where: {
+     *     // ... filter to delete one Lesson
+     *   }
+     * })
+     * 
+     */
+    delete<T extends LessonDeleteArgs>(args: SelectSubset<T, LessonDeleteArgs<ExtArgs>>): Prisma__LessonClient<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "delete", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Update one Lesson.
+     * @param {LessonUpdateArgs} args - Arguments to update one Lesson.
+     * @example
+     * // Update one Lesson
+     * const lesson = await prisma.lesson.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends LessonUpdateArgs>(args: SelectSubset<T, LessonUpdateArgs<ExtArgs>>): Prisma__LessonClient<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "update", ClientOptions>, never, ExtArgs, ClientOptions>
+
+    /**
+     * Delete zero or more Lessons.
+     * @param {LessonDeleteManyArgs} args - Arguments to filter Lessons to delete.
+     * @example
+     * // Delete a few Lessons
+     * const { count } = await prisma.lesson.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends LessonDeleteManyArgs>(args?: SelectSubset<T, LessonDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Lessons.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LessonUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Lessons
+     * const lesson = await prisma.lesson.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends LessonUpdateManyArgs>(args: SelectSubset<T, LessonUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Lessons and returns the data updated in the database.
+     * @param {LessonUpdateManyAndReturnArgs} args - Arguments to update many Lessons.
+     * @example
+     * // Update many Lessons
+     * const lesson = await prisma.lesson.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Lessons and only return the `id`
+     * const lessonWithIdOnly = await prisma.lesson.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends LessonUpdateManyAndReturnArgs>(args: SelectSubset<T, LessonUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "updateManyAndReturn", ClientOptions>>
+
+    /**
+     * Create or update one Lesson.
+     * @param {LessonUpsertArgs} args - Arguments to update or create a Lesson.
+     * @example
+     * // Update or create a Lesson
+     * const lesson = await prisma.lesson.upsert({
+     *   create: {
+     *     // ... data to create a Lesson
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Lesson we want to update
+     *   }
+     * })
+     */
+    upsert<T extends LessonUpsertArgs>(args: SelectSubset<T, LessonUpsertArgs<ExtArgs>>): Prisma__LessonClient<$Result.GetResult<Prisma.$LessonPayload<ExtArgs>, T, "upsert", ClientOptions>, never, ExtArgs, ClientOptions>
+
+
+    /**
+     * Count the number of Lessons.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LessonCountArgs} args - Arguments to filter Lessons to count.
+     * @example
+     * // Count the number of Lessons
+     * const count = await prisma.lesson.count({
+     *   where: {
+     *     // ... the filter for the Lessons we want to count
+     *   }
+     * })
+    **/
+    count<T extends LessonCountArgs>(
+      args?: Subset<T, LessonCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], LessonCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Lesson.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LessonAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends LessonAggregateArgs>(args: Subset<T, LessonAggregateArgs>): Prisma.PrismaPromise<GetLessonAggregateType<T>>
+
+    /**
+     * Group by Lesson.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {LessonGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends LessonGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: LessonGroupByArgs['orderBy'] }
+        : { orderBy?: LessonGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, LessonGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetLessonGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Lesson model
+   */
+  readonly fields: LessonFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Lesson.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__LessonClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, ClientOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    section<T extends SectionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SectionDefaultArgs<ExtArgs>>): Prisma__SectionClient<$Result.GetResult<Prisma.$SectionPayload<ExtArgs>, T, "findUniqueOrThrow", ClientOptions> | Null, Null, ExtArgs, ClientOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Lesson model
+   */ 
+  interface LessonFieldRefs {
+    readonly id: FieldRef<"Lesson", 'String'>
+    readonly createdAt: FieldRef<"Lesson", 'DateTime'>
+    readonly updatedAt: FieldRef<"Lesson", 'DateTime'>
+    readonly title: FieldRef<"Lesson", 'String'>
+    readonly slug: FieldRef<"Lesson", 'String'>
+    readonly videoUrl: FieldRef<"Lesson", 'String'>
+    readonly order: FieldRef<"Lesson", 'Int'>
+    readonly sectionId: FieldRef<"Lesson", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Lesson findUnique
+   */
+  export type LessonFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lesson
+     */
+    select?: LessonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lesson
+     */
+    omit?: LessonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LessonInclude<ExtArgs> | null
+    /**
+     * Filter, which Lesson to fetch.
+     */
+    where: LessonWhereUniqueInput
+  }
+
+  /**
+   * Lesson findUniqueOrThrow
+   */
+  export type LessonFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lesson
+     */
+    select?: LessonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lesson
+     */
+    omit?: LessonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LessonInclude<ExtArgs> | null
+    /**
+     * Filter, which Lesson to fetch.
+     */
+    where: LessonWhereUniqueInput
+  }
+
+  /**
+   * Lesson findFirst
+   */
+  export type LessonFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lesson
+     */
+    select?: LessonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lesson
+     */
+    omit?: LessonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LessonInclude<ExtArgs> | null
+    /**
+     * Filter, which Lesson to fetch.
+     */
+    where?: LessonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Lessons to fetch.
+     */
+    orderBy?: LessonOrderByWithRelationInput | LessonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Lessons.
+     */
+    cursor?: LessonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Lessons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Lessons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Lessons.
+     */
+    distinct?: LessonScalarFieldEnum | LessonScalarFieldEnum[]
+  }
+
+  /**
+   * Lesson findFirstOrThrow
+   */
+  export type LessonFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lesson
+     */
+    select?: LessonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lesson
+     */
+    omit?: LessonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LessonInclude<ExtArgs> | null
+    /**
+     * Filter, which Lesson to fetch.
+     */
+    where?: LessonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Lessons to fetch.
+     */
+    orderBy?: LessonOrderByWithRelationInput | LessonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Lessons.
+     */
+    cursor?: LessonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Lessons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Lessons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Lessons.
+     */
+    distinct?: LessonScalarFieldEnum | LessonScalarFieldEnum[]
+  }
+
+  /**
+   * Lesson findMany
+   */
+  export type LessonFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lesson
+     */
+    select?: LessonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lesson
+     */
+    omit?: LessonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LessonInclude<ExtArgs> | null
+    /**
+     * Filter, which Lessons to fetch.
+     */
+    where?: LessonWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Lessons to fetch.
+     */
+    orderBy?: LessonOrderByWithRelationInput | LessonOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Lessons.
+     */
+    cursor?: LessonWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Lessons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Lessons.
+     */
+    skip?: number
+    distinct?: LessonScalarFieldEnum | LessonScalarFieldEnum[]
+  }
+
+  /**
+   * Lesson create
+   */
+  export type LessonCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lesson
+     */
+    select?: LessonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lesson
+     */
+    omit?: LessonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LessonInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Lesson.
+     */
+    data: XOR<LessonCreateInput, LessonUncheckedCreateInput>
+  }
+
+  /**
+   * Lesson createMany
+   */
+  export type LessonCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Lessons.
+     */
+    data: LessonCreateManyInput | LessonCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Lesson createManyAndReturn
+   */
+  export type LessonCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lesson
+     */
+    select?: LessonSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lesson
+     */
+    omit?: LessonOmit<ExtArgs> | null
+    /**
+     * The data used to create many Lessons.
+     */
+    data: LessonCreateManyInput | LessonCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LessonIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Lesson update
+   */
+  export type LessonUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lesson
+     */
+    select?: LessonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lesson
+     */
+    omit?: LessonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LessonInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Lesson.
+     */
+    data: XOR<LessonUpdateInput, LessonUncheckedUpdateInput>
+    /**
+     * Choose, which Lesson to update.
+     */
+    where: LessonWhereUniqueInput
+  }
+
+  /**
+   * Lesson updateMany
+   */
+  export type LessonUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Lessons.
+     */
+    data: XOR<LessonUpdateManyMutationInput, LessonUncheckedUpdateManyInput>
+    /**
+     * Filter which Lessons to update
+     */
+    where?: LessonWhereInput
+    /**
+     * Limit how many Lessons to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Lesson updateManyAndReturn
+   */
+  export type LessonUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lesson
+     */
+    select?: LessonSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lesson
+     */
+    omit?: LessonOmit<ExtArgs> | null
+    /**
+     * The data used to update Lessons.
+     */
+    data: XOR<LessonUpdateManyMutationInput, LessonUncheckedUpdateManyInput>
+    /**
+     * Filter which Lessons to update
+     */
+    where?: LessonWhereInput
+    /**
+     * Limit how many Lessons to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LessonIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Lesson upsert
+   */
+  export type LessonUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lesson
+     */
+    select?: LessonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lesson
+     */
+    omit?: LessonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LessonInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Lesson to update in case it exists.
+     */
+    where: LessonWhereUniqueInput
+    /**
+     * In case the Lesson found by the `where` argument doesn't exist, create a new Lesson with this data.
+     */
+    create: XOR<LessonCreateInput, LessonUncheckedCreateInput>
+    /**
+     * In case the Lesson was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<LessonUpdateInput, LessonUncheckedUpdateInput>
+  }
+
+  /**
+   * Lesson delete
+   */
+  export type LessonDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lesson
+     */
+    select?: LessonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lesson
+     */
+    omit?: LessonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LessonInclude<ExtArgs> | null
+    /**
+     * Filter which Lesson to delete.
+     */
+    where: LessonWhereUniqueInput
+  }
+
+  /**
+   * Lesson deleteMany
+   */
+  export type LessonDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Lessons to delete
+     */
+    where?: LessonWhereInput
+    /**
+     * Limit how many Lessons to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Lesson without action
+   */
+  export type LessonDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Lesson
+     */
+    select?: LessonSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Lesson
+     */
+    omit?: LessonOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: LessonInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -5695,6 +6978,17 @@ export namespace Prisma {
   export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
 
 
+  export const DirectionScalarFieldEnum: {
+    id: 'id',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    name: 'name',
+    slug: 'slug'
+  };
+
+  export type DirectionScalarFieldEnum = (typeof DirectionScalarFieldEnum)[keyof typeof DirectionScalarFieldEnum]
+
+
   export const SectionScalarFieldEnum: {
     id: 'id',
     createdAt: 'createdAt',
@@ -5707,15 +7001,18 @@ export namespace Prisma {
   export type SectionScalarFieldEnum = (typeof SectionScalarFieldEnum)[keyof typeof SectionScalarFieldEnum]
 
 
-  export const DirectionScalarFieldEnum: {
+  export const LessonScalarFieldEnum: {
     id: 'id',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt',
-    name: 'name',
-    slug: 'slug'
+    title: 'title',
+    slug: 'slug',
+    videoUrl: 'videoUrl',
+    order: 'order',
+    sectionId: 'sectionId'
   };
 
-  export type DirectionScalarFieldEnum = (typeof DirectionScalarFieldEnum)[keyof typeof DirectionScalarFieldEnum]
+  export type LessonScalarFieldEnum = (typeof LessonScalarFieldEnum)[keyof typeof LessonScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5987,66 +7284,6 @@ export namespace Prisma {
     avgRating?: FloatWithAggregatesFilter<"Course"> | number
   }
 
-  export type SectionWhereInput = {
-    AND?: SectionWhereInput | SectionWhereInput[]
-    OR?: SectionWhereInput[]
-    NOT?: SectionWhereInput | SectionWhereInput[]
-    id?: StringFilter<"Section"> | string
-    createdAt?: DateTimeFilter<"Section"> | Date | string
-    updatedAt?: DateTimeFilter<"Section"> | Date | string
-    name?: StringFilter<"Section"> | string
-    slug?: StringFilter<"Section"> | string
-    courseId?: StringNullableFilter<"Section"> | string | null
-    course?: XOR<CourseNullableScalarRelationFilter, CourseWhereInput> | null
-  }
-
-  export type SectionOrderByWithRelationInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    courseId?: SortOrderInput | SortOrder
-    course?: CourseOrderByWithRelationInput
-  }
-
-  export type SectionWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    slug?: string
-    AND?: SectionWhereInput | SectionWhereInput[]
-    OR?: SectionWhereInput[]
-    NOT?: SectionWhereInput | SectionWhereInput[]
-    createdAt?: DateTimeFilter<"Section"> | Date | string
-    updatedAt?: DateTimeFilter<"Section"> | Date | string
-    name?: StringFilter<"Section"> | string
-    courseId?: StringNullableFilter<"Section"> | string | null
-    course?: XOR<CourseNullableScalarRelationFilter, CourseWhereInput> | null
-  }, "id" | "slug">
-
-  export type SectionOrderByWithAggregationInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    courseId?: SortOrderInput | SortOrder
-    _count?: SectionCountOrderByAggregateInput
-    _max?: SectionMaxOrderByAggregateInput
-    _min?: SectionMinOrderByAggregateInput
-  }
-
-  export type SectionScalarWhereWithAggregatesInput = {
-    AND?: SectionScalarWhereWithAggregatesInput | SectionScalarWhereWithAggregatesInput[]
-    OR?: SectionScalarWhereWithAggregatesInput[]
-    NOT?: SectionScalarWhereWithAggregatesInput | SectionScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"Section"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"Section"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Section"> | Date | string
-    name?: StringWithAggregatesFilter<"Section"> | string
-    slug?: StringWithAggregatesFilter<"Section"> | string
-    courseId?: StringNullableWithAggregatesFilter<"Section"> | string | null
-  }
-
   export type DirectionWhereInput = {
     AND?: DirectionWhereInput | DirectionWhereInput[]
     OR?: DirectionWhereInput[]
@@ -6100,6 +7337,141 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Direction"> | Date | string
     name?: StringWithAggregatesFilter<"Direction"> | string
     slug?: StringWithAggregatesFilter<"Direction"> | string
+  }
+
+  export type SectionWhereInput = {
+    AND?: SectionWhereInput | SectionWhereInput[]
+    OR?: SectionWhereInput[]
+    NOT?: SectionWhereInput | SectionWhereInput[]
+    id?: StringFilter<"Section"> | string
+    createdAt?: DateTimeFilter<"Section"> | Date | string
+    updatedAt?: DateTimeFilter<"Section"> | Date | string
+    name?: StringFilter<"Section"> | string
+    slug?: StringFilter<"Section"> | string
+    courseId?: StringNullableFilter<"Section"> | string | null
+    lessons?: LessonListRelationFilter
+    course?: XOR<CourseNullableScalarRelationFilter, CourseWhereInput> | null
+  }
+
+  export type SectionOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    courseId?: SortOrderInput | SortOrder
+    lessons?: LessonOrderByRelationAggregateInput
+    course?: CourseOrderByWithRelationInput
+  }
+
+  export type SectionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: SectionWhereInput | SectionWhereInput[]
+    OR?: SectionWhereInput[]
+    NOT?: SectionWhereInput | SectionWhereInput[]
+    createdAt?: DateTimeFilter<"Section"> | Date | string
+    updatedAt?: DateTimeFilter<"Section"> | Date | string
+    name?: StringFilter<"Section"> | string
+    courseId?: StringNullableFilter<"Section"> | string | null
+    lessons?: LessonListRelationFilter
+    course?: XOR<CourseNullableScalarRelationFilter, CourseWhereInput> | null
+  }, "id" | "slug">
+
+  export type SectionOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    courseId?: SortOrderInput | SortOrder
+    _count?: SectionCountOrderByAggregateInput
+    _max?: SectionMaxOrderByAggregateInput
+    _min?: SectionMinOrderByAggregateInput
+  }
+
+  export type SectionScalarWhereWithAggregatesInput = {
+    AND?: SectionScalarWhereWithAggregatesInput | SectionScalarWhereWithAggregatesInput[]
+    OR?: SectionScalarWhereWithAggregatesInput[]
+    NOT?: SectionScalarWhereWithAggregatesInput | SectionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Section"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Section"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Section"> | Date | string
+    name?: StringWithAggregatesFilter<"Section"> | string
+    slug?: StringWithAggregatesFilter<"Section"> | string
+    courseId?: StringNullableWithAggregatesFilter<"Section"> | string | null
+  }
+
+  export type LessonWhereInput = {
+    AND?: LessonWhereInput | LessonWhereInput[]
+    OR?: LessonWhereInput[]
+    NOT?: LessonWhereInput | LessonWhereInput[]
+    id?: StringFilter<"Lesson"> | string
+    createdAt?: DateTimeFilter<"Lesson"> | Date | string
+    updatedAt?: DateTimeFilter<"Lesson"> | Date | string
+    title?: StringFilter<"Lesson"> | string
+    slug?: StringFilter<"Lesson"> | string
+    videoUrl?: StringFilter<"Lesson"> | string
+    order?: IntFilter<"Lesson"> | number
+    sectionId?: StringFilter<"Lesson"> | string
+    section?: XOR<SectionScalarRelationFilter, SectionWhereInput>
+  }
+
+  export type LessonOrderByWithRelationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    videoUrl?: SortOrder
+    order?: SortOrder
+    sectionId?: SortOrder
+    section?: SectionOrderByWithRelationInput
+  }
+
+  export type LessonWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    AND?: LessonWhereInput | LessonWhereInput[]
+    OR?: LessonWhereInput[]
+    NOT?: LessonWhereInput | LessonWhereInput[]
+    createdAt?: DateTimeFilter<"Lesson"> | Date | string
+    updatedAt?: DateTimeFilter<"Lesson"> | Date | string
+    title?: StringFilter<"Lesson"> | string
+    videoUrl?: StringFilter<"Lesson"> | string
+    order?: IntFilter<"Lesson"> | number
+    sectionId?: StringFilter<"Lesson"> | string
+    section?: XOR<SectionScalarRelationFilter, SectionWhereInput>
+  }, "id" | "slug">
+
+  export type LessonOrderByWithAggregationInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    videoUrl?: SortOrder
+    order?: SortOrder
+    sectionId?: SortOrder
+    _count?: LessonCountOrderByAggregateInput
+    _avg?: LessonAvgOrderByAggregateInput
+    _max?: LessonMaxOrderByAggregateInput
+    _min?: LessonMinOrderByAggregateInput
+    _sum?: LessonSumOrderByAggregateInput
+  }
+
+  export type LessonScalarWhereWithAggregatesInput = {
+    AND?: LessonScalarWhereWithAggregatesInput | LessonScalarWhereWithAggregatesInput[]
+    OR?: LessonScalarWhereWithAggregatesInput[]
+    NOT?: LessonScalarWhereWithAggregatesInput | LessonScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Lesson"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Lesson"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Lesson"> | Date | string
+    title?: StringWithAggregatesFilter<"Lesson"> | string
+    slug?: StringWithAggregatesFilter<"Lesson"> | string
+    videoUrl?: StringWithAggregatesFilter<"Lesson"> | string
+    order?: IntWithAggregatesFilter<"Lesson"> | number
+    sectionId?: StringWithAggregatesFilter<"Lesson"> | string
   }
 
   export type UserCreateInput = {
@@ -6299,68 +7671,6 @@ export namespace Prisma {
     avgRating?: FloatFieldUpdateOperationsInput | number
   }
 
-  export type SectionCreateInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    name: string
-    slug: string
-    course?: CourseCreateNestedOneWithoutSectionsInput
-  }
-
-  export type SectionUncheckedCreateInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    name: string
-    slug: string
-    courseId?: string | null
-  }
-
-  export type SectionUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    course?: CourseUpdateOneWithoutSectionsNestedInput
-  }
-
-  export type SectionUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    courseId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type SectionCreateManyInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    name: string
-    slug: string
-    courseId?: string | null
-  }
-
-  export type SectionUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type SectionUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    courseId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
   export type DirectionCreateInput = {
     id?: string
     createdAt?: Date | string
@@ -6419,6 +7729,148 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SectionCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    name: string
+    slug: string
+    lessons?: LessonCreateNestedManyWithoutSectionInput
+    course?: CourseCreateNestedOneWithoutSectionsInput
+  }
+
+  export type SectionUncheckedCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    name: string
+    slug: string
+    courseId?: string | null
+    lessons?: LessonUncheckedCreateNestedManyWithoutSectionInput
+  }
+
+  export type SectionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    lessons?: LessonUpdateManyWithoutSectionNestedInput
+    course?: CourseUpdateOneWithoutSectionsNestedInput
+  }
+
+  export type SectionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    courseId?: NullableStringFieldUpdateOperationsInput | string | null
+    lessons?: LessonUncheckedUpdateManyWithoutSectionNestedInput
+  }
+
+  export type SectionCreateManyInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    name: string
+    slug: string
+    courseId?: string | null
+  }
+
+  export type SectionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SectionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    courseId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type LessonCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    title: string
+    slug: string
+    videoUrl: string
+    order: number
+    section: SectionCreateNestedOneWithoutLessonsInput
+  }
+
+  export type LessonUncheckedCreateInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    title: string
+    slug: string
+    videoUrl: string
+    order: number
+    sectionId: string
+  }
+
+  export type LessonUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    videoUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    section?: SectionUpdateOneRequiredWithoutLessonsNestedInput
+  }
+
+  export type LessonUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    videoUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    sectionId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type LessonCreateManyInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    title: string
+    slug: string
+    videoUrl: string
+    order: number
+    sectionId: string
+  }
+
+  export type LessonUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    videoUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LessonUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    videoUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+    sectionId?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -6674,38 +8126,6 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
-  export type CourseNullableScalarRelationFilter = {
-    is?: CourseWhereInput | null
-    isNot?: CourseWhereInput | null
-  }
-
-  export type SectionCountOrderByAggregateInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    courseId?: SortOrder
-  }
-
-  export type SectionMaxOrderByAggregateInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    courseId?: SortOrder
-  }
-
-  export type SectionMinOrderByAggregateInput = {
-    id?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    courseId?: SortOrder
-  }
-
   export type CourseListRelationFilter = {
     every?: CourseWhereInput
     some?: CourseWhereInput
@@ -6738,6 +8158,121 @@ export namespace Prisma {
     updatedAt?: SortOrder
     name?: SortOrder
     slug?: SortOrder
+  }
+
+  export type LessonListRelationFilter = {
+    every?: LessonWhereInput
+    some?: LessonWhereInput
+    none?: LessonWhereInput
+  }
+
+  export type CourseNullableScalarRelationFilter = {
+    is?: CourseWhereInput | null
+    isNot?: CourseWhereInput | null
+  }
+
+  export type LessonOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SectionCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    courseId?: SortOrder
+  }
+
+  export type SectionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    courseId?: SortOrder
+  }
+
+  export type SectionMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    courseId?: SortOrder
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type SectionScalarRelationFilter = {
+    is?: SectionWhereInput
+    isNot?: SectionWhereInput
+  }
+
+  export type LessonCountOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    videoUrl?: SortOrder
+    order?: SortOrder
+    sectionId?: SortOrder
+  }
+
+  export type LessonAvgOrderByAggregateInput = {
+    order?: SortOrder
+  }
+
+  export type LessonMaxOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    videoUrl?: SortOrder
+    order?: SortOrder
+    sectionId?: SortOrder
+  }
+
+  export type LessonMinOrderByAggregateInput = {
+    id?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    title?: SortOrder
+    slug?: SortOrder
+    videoUrl?: SortOrder
+    order?: SortOrder
+    sectionId?: SortOrder
+  }
+
+  export type LessonSumOrderByAggregateInput = {
+    order?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -6862,22 +8397,6 @@ export namespace Prisma {
     deleteMany?: SectionScalarWhereInput | SectionScalarWhereInput[]
   }
 
-  export type CourseCreateNestedOneWithoutSectionsInput = {
-    create?: XOR<CourseCreateWithoutSectionsInput, CourseUncheckedCreateWithoutSectionsInput>
-    connectOrCreate?: CourseCreateOrConnectWithoutSectionsInput
-    connect?: CourseWhereUniqueInput
-  }
-
-  export type CourseUpdateOneWithoutSectionsNestedInput = {
-    create?: XOR<CourseCreateWithoutSectionsInput, CourseUncheckedCreateWithoutSectionsInput>
-    connectOrCreate?: CourseCreateOrConnectWithoutSectionsInput
-    upsert?: CourseUpsertWithoutSectionsInput
-    disconnect?: CourseWhereInput | boolean
-    delete?: CourseWhereInput | boolean
-    connect?: CourseWhereUniqueInput
-    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutSectionsInput, CourseUpdateWithoutSectionsInput>, CourseUncheckedUpdateWithoutSectionsInput>
-  }
-
   export type CourseCreateNestedManyWithoutDirectionsInput = {
     create?: XOR<CourseCreateWithoutDirectionsInput, CourseUncheckedCreateWithoutDirectionsInput> | CourseCreateWithoutDirectionsInput[] | CourseUncheckedCreateWithoutDirectionsInput[]
     connectOrCreate?: CourseCreateOrConnectWithoutDirectionsInput | CourseCreateOrConnectWithoutDirectionsInput[]
@@ -6914,6 +8433,86 @@ export namespace Prisma {
     update?: CourseUpdateWithWhereUniqueWithoutDirectionsInput | CourseUpdateWithWhereUniqueWithoutDirectionsInput[]
     updateMany?: CourseUpdateManyWithWhereWithoutDirectionsInput | CourseUpdateManyWithWhereWithoutDirectionsInput[]
     deleteMany?: CourseScalarWhereInput | CourseScalarWhereInput[]
+  }
+
+  export type LessonCreateNestedManyWithoutSectionInput = {
+    create?: XOR<LessonCreateWithoutSectionInput, LessonUncheckedCreateWithoutSectionInput> | LessonCreateWithoutSectionInput[] | LessonUncheckedCreateWithoutSectionInput[]
+    connectOrCreate?: LessonCreateOrConnectWithoutSectionInput | LessonCreateOrConnectWithoutSectionInput[]
+    createMany?: LessonCreateManySectionInputEnvelope
+    connect?: LessonWhereUniqueInput | LessonWhereUniqueInput[]
+  }
+
+  export type CourseCreateNestedOneWithoutSectionsInput = {
+    create?: XOR<CourseCreateWithoutSectionsInput, CourseUncheckedCreateWithoutSectionsInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutSectionsInput
+    connect?: CourseWhereUniqueInput
+  }
+
+  export type LessonUncheckedCreateNestedManyWithoutSectionInput = {
+    create?: XOR<LessonCreateWithoutSectionInput, LessonUncheckedCreateWithoutSectionInput> | LessonCreateWithoutSectionInput[] | LessonUncheckedCreateWithoutSectionInput[]
+    connectOrCreate?: LessonCreateOrConnectWithoutSectionInput | LessonCreateOrConnectWithoutSectionInput[]
+    createMany?: LessonCreateManySectionInputEnvelope
+    connect?: LessonWhereUniqueInput | LessonWhereUniqueInput[]
+  }
+
+  export type LessonUpdateManyWithoutSectionNestedInput = {
+    create?: XOR<LessonCreateWithoutSectionInput, LessonUncheckedCreateWithoutSectionInput> | LessonCreateWithoutSectionInput[] | LessonUncheckedCreateWithoutSectionInput[]
+    connectOrCreate?: LessonCreateOrConnectWithoutSectionInput | LessonCreateOrConnectWithoutSectionInput[]
+    upsert?: LessonUpsertWithWhereUniqueWithoutSectionInput | LessonUpsertWithWhereUniqueWithoutSectionInput[]
+    createMany?: LessonCreateManySectionInputEnvelope
+    set?: LessonWhereUniqueInput | LessonWhereUniqueInput[]
+    disconnect?: LessonWhereUniqueInput | LessonWhereUniqueInput[]
+    delete?: LessonWhereUniqueInput | LessonWhereUniqueInput[]
+    connect?: LessonWhereUniqueInput | LessonWhereUniqueInput[]
+    update?: LessonUpdateWithWhereUniqueWithoutSectionInput | LessonUpdateWithWhereUniqueWithoutSectionInput[]
+    updateMany?: LessonUpdateManyWithWhereWithoutSectionInput | LessonUpdateManyWithWhereWithoutSectionInput[]
+    deleteMany?: LessonScalarWhereInput | LessonScalarWhereInput[]
+  }
+
+  export type CourseUpdateOneWithoutSectionsNestedInput = {
+    create?: XOR<CourseCreateWithoutSectionsInput, CourseUncheckedCreateWithoutSectionsInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutSectionsInput
+    upsert?: CourseUpsertWithoutSectionsInput
+    disconnect?: CourseWhereInput | boolean
+    delete?: CourseWhereInput | boolean
+    connect?: CourseWhereUniqueInput
+    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutSectionsInput, CourseUpdateWithoutSectionsInput>, CourseUncheckedUpdateWithoutSectionsInput>
+  }
+
+  export type LessonUncheckedUpdateManyWithoutSectionNestedInput = {
+    create?: XOR<LessonCreateWithoutSectionInput, LessonUncheckedCreateWithoutSectionInput> | LessonCreateWithoutSectionInput[] | LessonUncheckedCreateWithoutSectionInput[]
+    connectOrCreate?: LessonCreateOrConnectWithoutSectionInput | LessonCreateOrConnectWithoutSectionInput[]
+    upsert?: LessonUpsertWithWhereUniqueWithoutSectionInput | LessonUpsertWithWhereUniqueWithoutSectionInput[]
+    createMany?: LessonCreateManySectionInputEnvelope
+    set?: LessonWhereUniqueInput | LessonWhereUniqueInput[]
+    disconnect?: LessonWhereUniqueInput | LessonWhereUniqueInput[]
+    delete?: LessonWhereUniqueInput | LessonWhereUniqueInput[]
+    connect?: LessonWhereUniqueInput | LessonWhereUniqueInput[]
+    update?: LessonUpdateWithWhereUniqueWithoutSectionInput | LessonUpdateWithWhereUniqueWithoutSectionInput[]
+    updateMany?: LessonUpdateManyWithWhereWithoutSectionInput | LessonUpdateManyWithWhereWithoutSectionInput[]
+    deleteMany?: LessonScalarWhereInput | LessonScalarWhereInput[]
+  }
+
+  export type SectionCreateNestedOneWithoutLessonsInput = {
+    create?: XOR<SectionCreateWithoutLessonsInput, SectionUncheckedCreateWithoutLessonsInput>
+    connectOrCreate?: SectionCreateOrConnectWithoutLessonsInput
+    connect?: SectionWhereUniqueInput
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type SectionUpdateOneRequiredWithoutLessonsNestedInput = {
+    create?: XOR<SectionCreateWithoutLessonsInput, SectionUncheckedCreateWithoutLessonsInput>
+    connectOrCreate?: SectionCreateOrConnectWithoutLessonsInput
+    upsert?: SectionUpsertWithoutLessonsInput
+    connect?: SectionWhereUniqueInput
+    update?: XOR<XOR<SectionUpdateToOneWithWhereWithoutLessonsInput, SectionUpdateWithoutLessonsInput>, SectionUncheckedUpdateWithoutLessonsInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -7069,6 +8668,22 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
   export type DirectionCreateWithoutCoursesInput = {
     id?: string
     createdAt?: Date | string
@@ -7096,6 +8711,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     name: string
     slug: string
+    lessons?: LessonCreateNestedManyWithoutSectionInput
   }
 
   export type SectionUncheckedCreateWithoutCourseInput = {
@@ -7104,6 +8720,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     name: string
     slug: string
+    lessons?: LessonUncheckedCreateNestedManyWithoutSectionInput
   }
 
   export type SectionCreateOrConnectWithoutCourseInput = {
@@ -7169,82 +8786,6 @@ export namespace Prisma {
     name?: StringFilter<"Section"> | string
     slug?: StringFilter<"Section"> | string
     courseId?: StringNullableFilter<"Section"> | string | null
-  }
-
-  export type CourseCreateWithoutSectionsInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    title: string
-    slug: string
-    description: string
-    thumbnail: string
-    requirements?: CourseCreaterequirementsInput | string[]
-    subTitle: string
-    techs?: CourseCreatetechsInput | string[]
-    avgRating?: number
-    directions?: DirectionCreateNestedManyWithoutCoursesInput
-  }
-
-  export type CourseUncheckedCreateWithoutSectionsInput = {
-    id?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    title: string
-    slug: string
-    description: string
-    thumbnail: string
-    requirements?: CourseCreaterequirementsInput | string[]
-    subTitle: string
-    techs?: CourseCreatetechsInput | string[]
-    avgRating?: number
-    directions?: DirectionUncheckedCreateNestedManyWithoutCoursesInput
-  }
-
-  export type CourseCreateOrConnectWithoutSectionsInput = {
-    where: CourseWhereUniqueInput
-    create: XOR<CourseCreateWithoutSectionsInput, CourseUncheckedCreateWithoutSectionsInput>
-  }
-
-  export type CourseUpsertWithoutSectionsInput = {
-    update: XOR<CourseUpdateWithoutSectionsInput, CourseUncheckedUpdateWithoutSectionsInput>
-    create: XOR<CourseCreateWithoutSectionsInput, CourseUncheckedCreateWithoutSectionsInput>
-    where?: CourseWhereInput
-  }
-
-  export type CourseUpdateToOneWithWhereWithoutSectionsInput = {
-    where?: CourseWhereInput
-    data: XOR<CourseUpdateWithoutSectionsInput, CourseUncheckedUpdateWithoutSectionsInput>
-  }
-
-  export type CourseUpdateWithoutSectionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    thumbnail?: StringFieldUpdateOperationsInput | string
-    requirements?: CourseUpdaterequirementsInput | string[]
-    subTitle?: StringFieldUpdateOperationsInput | string
-    techs?: CourseUpdatetechsInput | string[]
-    avgRating?: FloatFieldUpdateOperationsInput | number
-    directions?: DirectionUpdateManyWithoutCoursesNestedInput
-  }
-
-  export type CourseUncheckedUpdateWithoutSectionsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    title?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    thumbnail?: StringFieldUpdateOperationsInput | string
-    requirements?: CourseUpdaterequirementsInput | string[]
-    subTitle?: StringFieldUpdateOperationsInput | string
-    techs?: CourseUpdatetechsInput | string[]
-    avgRating?: FloatFieldUpdateOperationsInput | number
-    directions?: DirectionUncheckedUpdateManyWithoutCoursesNestedInput
   }
 
   export type CourseCreateWithoutDirectionsInput = {
@@ -7315,6 +8856,194 @@ export namespace Prisma {
     avgRating?: FloatFilter<"Course"> | number
   }
 
+  export type LessonCreateWithoutSectionInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    title: string
+    slug: string
+    videoUrl: string
+    order: number
+  }
+
+  export type LessonUncheckedCreateWithoutSectionInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    title: string
+    slug: string
+    videoUrl: string
+    order: number
+  }
+
+  export type LessonCreateOrConnectWithoutSectionInput = {
+    where: LessonWhereUniqueInput
+    create: XOR<LessonCreateWithoutSectionInput, LessonUncheckedCreateWithoutSectionInput>
+  }
+
+  export type LessonCreateManySectionInputEnvelope = {
+    data: LessonCreateManySectionInput | LessonCreateManySectionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CourseCreateWithoutSectionsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    title: string
+    slug: string
+    description: string
+    thumbnail: string
+    requirements?: CourseCreaterequirementsInput | string[]
+    subTitle: string
+    techs?: CourseCreatetechsInput | string[]
+    avgRating?: number
+    directions?: DirectionCreateNestedManyWithoutCoursesInput
+  }
+
+  export type CourseUncheckedCreateWithoutSectionsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    title: string
+    slug: string
+    description: string
+    thumbnail: string
+    requirements?: CourseCreaterequirementsInput | string[]
+    subTitle: string
+    techs?: CourseCreatetechsInput | string[]
+    avgRating?: number
+    directions?: DirectionUncheckedCreateNestedManyWithoutCoursesInput
+  }
+
+  export type CourseCreateOrConnectWithoutSectionsInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutSectionsInput, CourseUncheckedCreateWithoutSectionsInput>
+  }
+
+  export type LessonUpsertWithWhereUniqueWithoutSectionInput = {
+    where: LessonWhereUniqueInput
+    update: XOR<LessonUpdateWithoutSectionInput, LessonUncheckedUpdateWithoutSectionInput>
+    create: XOR<LessonCreateWithoutSectionInput, LessonUncheckedCreateWithoutSectionInput>
+  }
+
+  export type LessonUpdateWithWhereUniqueWithoutSectionInput = {
+    where: LessonWhereUniqueInput
+    data: XOR<LessonUpdateWithoutSectionInput, LessonUncheckedUpdateWithoutSectionInput>
+  }
+
+  export type LessonUpdateManyWithWhereWithoutSectionInput = {
+    where: LessonScalarWhereInput
+    data: XOR<LessonUpdateManyMutationInput, LessonUncheckedUpdateManyWithoutSectionInput>
+  }
+
+  export type LessonScalarWhereInput = {
+    AND?: LessonScalarWhereInput | LessonScalarWhereInput[]
+    OR?: LessonScalarWhereInput[]
+    NOT?: LessonScalarWhereInput | LessonScalarWhereInput[]
+    id?: StringFilter<"Lesson"> | string
+    createdAt?: DateTimeFilter<"Lesson"> | Date | string
+    updatedAt?: DateTimeFilter<"Lesson"> | Date | string
+    title?: StringFilter<"Lesson"> | string
+    slug?: StringFilter<"Lesson"> | string
+    videoUrl?: StringFilter<"Lesson"> | string
+    order?: IntFilter<"Lesson"> | number
+    sectionId?: StringFilter<"Lesson"> | string
+  }
+
+  export type CourseUpsertWithoutSectionsInput = {
+    update: XOR<CourseUpdateWithoutSectionsInput, CourseUncheckedUpdateWithoutSectionsInput>
+    create: XOR<CourseCreateWithoutSectionsInput, CourseUncheckedCreateWithoutSectionsInput>
+    where?: CourseWhereInput
+  }
+
+  export type CourseUpdateToOneWithWhereWithoutSectionsInput = {
+    where?: CourseWhereInput
+    data: XOR<CourseUpdateWithoutSectionsInput, CourseUncheckedUpdateWithoutSectionsInput>
+  }
+
+  export type CourseUpdateWithoutSectionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    thumbnail?: StringFieldUpdateOperationsInput | string
+    requirements?: CourseUpdaterequirementsInput | string[]
+    subTitle?: StringFieldUpdateOperationsInput | string
+    techs?: CourseUpdatetechsInput | string[]
+    avgRating?: FloatFieldUpdateOperationsInput | number
+    directions?: DirectionUpdateManyWithoutCoursesNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutSectionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    thumbnail?: StringFieldUpdateOperationsInput | string
+    requirements?: CourseUpdaterequirementsInput | string[]
+    subTitle?: StringFieldUpdateOperationsInput | string
+    techs?: CourseUpdatetechsInput | string[]
+    avgRating?: FloatFieldUpdateOperationsInput | number
+    directions?: DirectionUncheckedUpdateManyWithoutCoursesNestedInput
+  }
+
+  export type SectionCreateWithoutLessonsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    name: string
+    slug: string
+    course?: CourseCreateNestedOneWithoutSectionsInput
+  }
+
+  export type SectionUncheckedCreateWithoutLessonsInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    name: string
+    slug: string
+    courseId?: string | null
+  }
+
+  export type SectionCreateOrConnectWithoutLessonsInput = {
+    where: SectionWhereUniqueInput
+    create: XOR<SectionCreateWithoutLessonsInput, SectionUncheckedCreateWithoutLessonsInput>
+  }
+
+  export type SectionUpsertWithoutLessonsInput = {
+    update: XOR<SectionUpdateWithoutLessonsInput, SectionUncheckedUpdateWithoutLessonsInput>
+    create: XOR<SectionCreateWithoutLessonsInput, SectionUncheckedCreateWithoutLessonsInput>
+    where?: SectionWhereInput
+  }
+
+  export type SectionUpdateToOneWithWhereWithoutLessonsInput = {
+    where?: SectionWhereInput
+    data: XOR<SectionUpdateWithoutLessonsInput, SectionUncheckedUpdateWithoutLessonsInput>
+  }
+
+  export type SectionUpdateWithoutLessonsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    course?: CourseUpdateOneWithoutSectionsNestedInput
+  }
+
+  export type SectionUncheckedUpdateWithoutLessonsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    courseId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
   export type SectionCreateManyCourseInput = {
     id?: string
     createdAt?: Date | string
@@ -7353,6 +9082,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    lessons?: LessonUpdateManyWithoutSectionNestedInput
   }
 
   export type SectionUncheckedUpdateWithoutCourseInput = {
@@ -7361,6 +9091,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    lessons?: LessonUncheckedUpdateManyWithoutSectionNestedInput
   }
 
   export type SectionUncheckedUpdateManyWithoutCourseInput = {
@@ -7413,6 +9144,46 @@ export namespace Prisma {
     subTitle?: StringFieldUpdateOperationsInput | string
     techs?: CourseUpdatetechsInput | string[]
     avgRating?: FloatFieldUpdateOperationsInput | number
+  }
+
+  export type LessonCreateManySectionInput = {
+    id?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    title: string
+    slug: string
+    videoUrl: string
+    order: number
+  }
+
+  export type LessonUpdateWithoutSectionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    videoUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LessonUncheckedUpdateWithoutSectionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    videoUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type LessonUncheckedUpdateManyWithoutSectionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    title?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    videoUrl?: StringFieldUpdateOperationsInput | string
+    order?: IntFieldUpdateOperationsInput | number
   }
 
 

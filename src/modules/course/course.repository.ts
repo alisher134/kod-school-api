@@ -21,7 +21,9 @@ export class CourseRepository {
     ): Promise<Course | null> {
         return this.prismaService.course.findUnique({
             where,
-            include: { directions: true, sections: true },
+            include: {
+                directions: true,
+            },
         });
     }
 
