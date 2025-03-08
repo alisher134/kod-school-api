@@ -49,6 +49,19 @@ model Course {
   avgRating Float @default(4.0)
 
   directions Direction[]
+  sections   Section[]
+}
+
+model Section {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  name String
+  slug String @unique
+
+  course   Course? @relation(fields: [courseId], references: [id])
+  courseId String?
 }
 
 model Direction {
@@ -59,8 +72,7 @@ model Direction {
   name String
   slug String @unique
 
-  course   Course? @relation(fields: [courseId], references: [id])
-  courseId String?
+  courses Course[]
 }
 
 enum UserRole {

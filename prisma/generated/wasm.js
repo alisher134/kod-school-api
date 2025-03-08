@@ -144,13 +144,21 @@ exports.Prisma.CourseScalarFieldEnum = {
   avgRating: 'avgRating'
 };
 
-exports.Prisma.DirectionScalarFieldEnum = {
+exports.Prisma.SectionScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   name: 'name',
   slug: 'slug',
   courseId: 'courseId'
+};
+
+exports.Prisma.DirectionScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  name: 'name',
+  slug: 'slug'
 };
 
 exports.Prisma.SortOrder = {
@@ -175,6 +183,7 @@ exports.UserRole = exports.$Enums.UserRole = {
 exports.Prisma.ModelName = {
   User: 'User',
   Course: 'Course',
+  Section: 'Section',
   Direction: 'Direction'
 };
 

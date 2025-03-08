@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import { Course, Prisma } from '@prisma/generated';
+import type { Course, Prisma } from '@prisma/generated';
 
 import { generateSlug } from '@common/utils';
 
