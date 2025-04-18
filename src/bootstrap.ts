@@ -2,7 +2,6 @@ import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
-import helmet from 'helmet';
 
 import { isDev, isProd } from '@common/utils';
 
@@ -12,7 +11,6 @@ export async function bootstrap(app: INestApplication): Promise<void> {
     const logger = new Logger('Bootstrap');
     const configService = app.get(ConfigService<IConfigs, true>);
 
-    app.use(helmet({ contentSecurityPolicy: !isDev }));
     app.use(cookieParser());
     app.use(compression());
 

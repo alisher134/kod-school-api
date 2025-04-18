@@ -20,7 +20,7 @@ export class UserService {
 
     async getProfile(userId: string): Promise<IUserProfile> {
         const user = await this.findById(userId);
-        return { profile: this.omitPassword(user) };
+        return { profile: user };
     }
 
     async findByEmail(email: string): Promise<User | null> {

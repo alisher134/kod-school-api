@@ -36,45 +36,19 @@ model Course {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  title       String
-  slug        String @unique
-  description String
+  title String
+  slug  String @unique
 
-  thumbnail    String
-  requirements String[]
-  subTitle     String
+  description String?
+  thumbnail   String?
 
-  techs String[]
+  attachment String?
 
-  avgRating Float @default(4.0)
+  isPublished Boolean @default(false)
 
-  directions Direction[]
-  sections   Section[]
-}
-
-model Direction {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  name String
-  slug String @unique
-
-  courses Course[]
-}
-
-model Section {
-  id        String   @id @default(uuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-
-  name String
-  slug String @unique
+  views Int @default(0)
 
   lessons Lesson[]
-
-  course   Course? @relation(fields: [courseId], references: [id])
-  courseId String?
 }
 
 model Lesson {
@@ -82,13 +56,31 @@ model Lesson {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  title    String
-  slug     String @unique
-  videoUrl String
-  order    Int
+  title String
+  slug  String @unique
 
-  section   Section @relation(fields: [sectionId], references: [id])
-  sectionId String
+  description String?
+  position    Int
+
+  kinescopeId String?
+
+  isPublished Boolean @default(false)
+
+  userProgress UserProgress[]
+
+  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId String
+}
+
+model UserProgress {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  isCompleted Boolean @default(false)
+
+  lesson   Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  lessonId String
 }
 
 enum UserRole {
