@@ -27,6 +27,13 @@ export class UserController {
     }
 
     @Auth()
+    @Get('@me/progress')
+    @HttpCode(HttpStatus.OK)
+    public async getMeProgress(@CurrentUser() user: User) {
+        return this.userService.getMeProgress(user);
+    }
+
+    @Auth()
     @Patch('profile')
     @HttpCode(HttpStatus.OK)
     updateProfile(

@@ -138,8 +138,6 @@ exports.Prisma.CourseScalarFieldEnum = {
   slug: 'slug',
   description: 'description',
   thumbnail: 'thumbnail',
-  attachment: 'attachment',
-  isPublished: 'isPublished',
   views: 'views'
 };
 
@@ -151,8 +149,7 @@ exports.Prisma.LessonScalarFieldEnum = {
   slug: 'slug',
   description: 'description',
   position: 'position',
-  kinescopeId: 'kinescopeId',
-  isPublished: 'isPublished',
+  lessonUrl: 'lessonUrl',
   courseId: 'courseId'
 };
 
@@ -161,7 +158,8 @@ exports.Prisma.UserProgressScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   isCompleted: 'isCompleted',
-  lessonId: 'lessonId'
+  lessonId: 'lessonId',
+  userId: 'userId'
 };
 
 exports.Prisma.SortOrder = {
