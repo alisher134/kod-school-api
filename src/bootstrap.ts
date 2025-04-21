@@ -2,6 +2,7 @@ import { INestApplication, Logger, ValidationPipe } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
+import helmet from 'helmet';
 
 import { isDev, isProd } from '@common/utils';
 
@@ -12,6 +13,21 @@ export async function bootstrap(app: INestApplication): Promise<void> {
     const configService = app.get(ConfigService<IConfigs, true>);
 
     app.use(cookieParser());
+    app.use(
+        helmet({
+            hidePoweredBy: true, // Отключаем заголовок X-Powered-By
+            noSniff: true, // Отключаем MIME-сниффинг
+            frameguard: {
+                action: 'sameorigin',
+            },
+            contentSecurityPolicy: {
+                directives: {
+                    frameAncestors: ["'self'"], // Разрешаем встраивание только с того же домена
+                },
+            },
+        }),
+    );
+
     app.use(compression());
 
     app.useGlobalPipes(
