@@ -2,8 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import Joi from 'joi';
 
-import { isDev } from '@common/utils';
-
 import {
     appConfig,
     appConfigValidationSchema,
@@ -31,7 +29,7 @@ const load = [appConfig, databaseConfig, redisConfig, jwtConfig, mailConfig];
     imports: [
         ConfigModule.forRoot({
             isGlobal: true,
-            envFilePath: isDev ? '.env.development' : '.env.production',
+            envFilePath: '.env',
             load,
             validationSchema,
         }),
