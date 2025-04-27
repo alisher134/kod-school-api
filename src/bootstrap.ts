@@ -15,16 +15,38 @@ export async function bootstrap(app: INestApplication): Promise<void> {
     app.use(cookieParser());
     app.use(
         helmet({
-            hidePoweredBy: true, // Отключаем заголовок X-Powered-By
-            noSniff: true, // Отключаем MIME-сниффинг
-            frameguard: {
-                action: 'sameorigin',
-            },
             contentSecurityPolicy: {
                 directives: {
-                    frameAncestors: ["'self'"], // Разрешаем встраивание только с того же домена
+                    defaultSrc: ["'self'"],
+                    scriptSrc: ["'self'"], // Без 'unsafe-inline', использовать nonce или хеши
+                    styleSrc: ["'self'"],
+                    imgSrc: ["'self'", 'data:', 'https://api.kodschool.kz'],
+                    connectSrc: [
+                        "'self'",
+                        'https://api.kodschool.kz',
+                        'https://kodschool.kz',
+                    ],
+                    fontSrc: ["'self'"],
+                    objectSrc: ["'none'"],
+                    mediaSrc: ["'self'"],
+                    frameSrc: ["'none'"],
+                    upgradeInsecureRequests: [],
                 },
             },
+            referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
+            xssFilter: true,
+            noSniff: true,
+            hsts: {
+                maxAge: 31536000,
+                includeSubDomains: true,
+                preload: true,
+            },
+            frameguard: { action: 'sameorigin' },
+            hidePoweredBy: true,
+            permittedCrossDomainPolicies: { permittedPolicies: 'none' },
+            crossOriginEmbedderPolicy: { policy: 'credentialless' },
+            crossOriginOpenerPolicy: { policy: 'same-origin-allow-popups' },
+            crossOriginResourcePolicy: { policy: 'cross-origin' },
         }),
     );
 

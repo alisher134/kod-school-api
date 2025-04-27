@@ -15,17 +15,14 @@ export class TokenCookieService {
     ) {}
 
     setRefreshTokenToCookie(res: Response, refreshToken: string): void {
-        const expiresIn = new Date();
-        expiresIn.setDate(expiresIn.getDate() + 7);
-
         res.cookie(this.REFRESH_TOKEN_NAME, refreshToken, {
             httpOnly: true,
             secure: isProd,
             domain: this.configService.get('app.domain', {
                 infer: true,
             }),
-            sameSite: 'lax',
-            expires: expiresIn,
+            sameSite: 'strict',
+            maxAge: 7 * 24 * 60 * 60 * 1000,
         });
     }
 
@@ -36,7 +33,7 @@ export class TokenCookieService {
             domain: this.configService.get('app.domain', {
                 infer: true,
             }),
-            sameSite: 'lax',
+            sameSite: 'strict',
         });
     }
 }

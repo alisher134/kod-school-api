@@ -1,12 +1,10 @@
-version: '3.8'
-
 services:
     postgres:
         container_name: kod-school-postgres
         image: postgres:16-alpine
         restart: unless-stopped
         env_file:
-            - .env.development
+            - .env
         volumes:
             - kod-school-postgres_data:/var/lib/postgresql/data
         networks:
@@ -19,7 +17,7 @@ services:
         image: redis:7-alpine
         restart: unless-stopped
         env_file:
-            - .env.development
+            - .env
         command: sh -c "redis-server --requirepass $${REDIS_PASSWORD}"
         volumes:
             - kod-school-redis_data:/data
