@@ -6,6 +6,8 @@ import { generateSlug } from '@common/utils';
 
 import { PrismaService } from '@infrastructure/prisma';
 
+import { CommentSelect } from '@modules/comment/comment.select';
+
 import { CreateLessonDto, UpdateLessonDto } from './dto';
 
 @Injectable()
@@ -19,6 +21,9 @@ export class LessonService {
             },
             include: {
                 course: true,
+                comments: {
+                    select: CommentSelect,
+                },
                 userProgress: {
                     select: {
                         isCompleted: true,

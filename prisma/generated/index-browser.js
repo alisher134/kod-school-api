@@ -162,6 +162,15 @@ exports.Prisma.UserProgressScalarFieldEnum = {
   userId: 'userId'
 };
 
+exports.Prisma.CommentScalarFieldEnum = {
+  id: 'id',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  text: 'text',
+  userId: 'userId',
+  lessonId: 'lessonId'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -185,7 +194,8 @@ exports.Prisma.ModelName = {
   User: 'User',
   Course: 'Course',
   Lesson: 'Lesson',
-  UserProgress: 'UserProgress'
+  UserProgress: 'UserProgress',
+  Comment: 'Comment'
 };
 
 /**

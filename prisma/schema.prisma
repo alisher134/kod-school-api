@@ -30,6 +30,7 @@ model User {
 
   userProgress UserProgress[]
   role         UserRole       @default(STUDENT)
+  comments     Comment[]
 }
 
 model Course {
@@ -62,6 +63,7 @@ model Lesson {
   lessonUrl String?
 
   userProgress UserProgress[]
+  comments     Comment[]
 
   course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
   courseId String
@@ -81,6 +83,20 @@ model UserProgress {
   userId String?
 
   @@unique([userId, lessonId])
+}
+
+model Comment {
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  text String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+
+  lesson   Lesson? @relation(fields: [lessonId], references: [id])
+  lessonId String?
 }
 
 enum UserRole {
