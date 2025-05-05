@@ -8,12 +8,14 @@ import {
     Patch,
     Post,
     Put,
+    Query,
 } from '@nestjs/common';
 
 import { Auth } from '@modules/auth/decorators';
 
 import { CourseService } from './course.service';
 import { CreateCourseDto } from './dto/create-course.dto';
+import { FilterCourseDto } from './dto/filter-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 
 @Controller('course')
@@ -24,6 +26,12 @@ export class CourseController {
     @HttpCode(HttpStatus.OK)
     async getAll() {
         return this.courseService.getAll();
+    }
+
+    @Get('search')
+    @HttpCode(HttpStatus.OK)
+    async getList(@Query() dto: FilterCourseDto) {
+        return this.courseService.searchCourses(dto);
     }
 
     @Get('popular')

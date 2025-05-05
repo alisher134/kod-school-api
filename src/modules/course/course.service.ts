@@ -1,19 +1,46 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
+import { Prisma } from '@prisma/generated';
+
 import { generateSlug } from '@common/utils';
 
 import { PrismaService } from '@infrastructure/prisma';
 import { RedisService } from '@infrastructure/redis';
 
+import { PaginationService } from '@modules/pagination/pagination.service';
+
 import { CreateCourseDto } from './dto/create-course.dto';
+import { FilterCourseDto } from './dto/filter-course.dto';
 import { UpdateCourseDto } from './dto/update-course.dto';
 
 @Injectable()
 export class CourseService {
     constructor(
         private readonly prismaService: PrismaService,
+        private paginationService: PaginationService,
         private readonly redisService: RedisService,
     ) {}
+
+    async searchCourses(dto: FilterCourseDto = {}) {
+        const searchTermQuery = dto.searchTerm
+            ? this.getSearchTermFilter(dto.searchTerm)
+            : {};
+
+        const { perPage, skip } = this.paginationService.getPagination(dto);
+
+        const courses = await this.prismaService.course.findMany({
+            where: searchTermQuery,
+            skip,
+            take: perPage,
+        });
+
+        return {
+            courses,
+            length: await this.prismaService.course.count({
+                where: searchTermQuery,
+            }),
+        };
+    }
 
     async getAll() {
         const courses = await this.prismaService.course.findMany({
@@ -137,5 +164,24 @@ export class CourseService {
         });
 
         return { id: course.id };
+    }
+
+    private getSearchTermFilter(searchTerm: string): Prisma.CourseWhereInput {
+        return {
+            OR: [
+                {
+                    title: {
+                        contains: searchTerm,
+                        mode: 'insensitive',
+                    },
+                },
+                {
+                    slug: {
+                        contains: searchTerm,
+                        mode: 'insensitive',
+                    },
+                },
+            ],
+        };
     }
 }
