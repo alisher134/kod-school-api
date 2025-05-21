@@ -56,17 +56,16 @@ export class CourseService {
     }
 
     async getPopular() {
-        const courses = await this.prismaService.course.findMany({
-            orderBy: {
-                createdAt: 'desc',
+        return this.prismaService.course.findMany({
+            where: {
+                views: {
+                    gt: 50,
+                },
             },
             include: {
                 lessons: true,
             },
-            take: 4,
         });
-
-        return courses;
     }
 
     async getBySlug(slug: string) {
