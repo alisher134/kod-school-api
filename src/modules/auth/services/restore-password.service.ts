@@ -74,7 +74,7 @@ export class RestorePasswordService {
             );
 
         const hashedPassword = await this.hashService.hashPassword(
-            dto.newPassword,
+            dto.password,
         );
 
         const updateUser = await this.userRepository.update(

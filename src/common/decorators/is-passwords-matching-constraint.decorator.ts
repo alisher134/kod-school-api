@@ -14,7 +14,7 @@ export class IsPasswordsMatchingConstraint
 {
     validate(passwordConfirm: string, args: ValidationArguments): boolean {
         const obj = args.object as RestorePasswordDto;
-        return obj.newPassword === passwordConfirm;
+        return obj.password === passwordConfirm;
     }
 
     defaultMessage(): string {

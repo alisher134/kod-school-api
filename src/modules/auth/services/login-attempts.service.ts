@@ -6,7 +6,7 @@ import { RedisService } from '@infrastructure/redis';
 @Injectable()
 export class LoginAttemptsService {
     private readonly LOGIN_ATTEMPTS_KEY = 'login_attempts';
-    private readonly MAX_ATTEMPTS = 5;
+    private readonly MAX_ATTEMPTS = 3;
     private readonly BLOCK_TIME = 300;
 
     private logger = new Logger(LoginAttemptsService.name);

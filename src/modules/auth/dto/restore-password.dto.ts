@@ -8,7 +8,7 @@ export class RestorePasswordDto {
 
     @IsString()
     @MinLength(8)
-    newPassword: string;
+    password: string;
 
     @IsString()
     @MinLength(8)
